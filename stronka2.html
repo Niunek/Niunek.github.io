@@ -1,65 +1,166 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-<title>Memy</title>
+    <title>Memy</title>
+    <style>
+        body{
+            background-color: rgb(19, 202, 226);
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1, h2{
+            margin-top: 20px;
+        }
+
+        /* GALERIA MEMÓW */
+        .galeria{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+            justify-items: center;
+        }
+
+        .zoom{
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.4);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .zoom:hover{
+            transform: scale(1.1);
+        }
+
+        /* LIGHTBOX */
+        #lightbox{
+            position: fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background: rgba(0,0,0,0.8);
+            display:none;
+            justify-content:center;
+            align-items:center;
+            z-index: 1000;
+        }
+
+        #lightbox img{
+            max-width:80%;
+            max-height:80%;
+            border-radius: 10px;
+        }
+
+        /* PRZYCISK COFNIJ */
+        .back{
+            display: inline-block;
+            margin: 20px;
+            padding: 12px 25px;
+            font-size: 20px;
+            background-color: white;
+            color: black;
+            text-decoration: none;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+
+        .back:hover{
+            background-color: lightgray;
+        }
+
+        /* PRZYCISK LOSUJ MEM */
+        #losujBtn{
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            background-color: white;
+            box-shadow: 0px 3px 8px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+
+        #losujBtn:hover{
+            background-color: lightgray;
+        }
+    </style>
 </head>
-<style>
-    body{
-        background-color: rgb(19, 202, 226);
-        text-align: center;
-        font-family: Arial;
-    }
 
-    .galeria{
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        padding: 20px;
-    }
-
-    .zoom{
-       width: 100%;
-       height: auto;
-       border-radius: 10px;
-      box-shadow: 0px 5px 15px rgba(0,0,0,0.4);
-       transition: transform 0.3s;
-    }
-
-    .zoom:hover{
-       transform: scale(1.1);
-    }
-
-</style>
-
-</head>
-
-<body></body>
+<body>
 
 <h1>Memy</h1>
-
 <p>Najlepsze memy na świecie</p>
 
 <a href="/index.html" class="back">⬅ Cofnij</a>
 
+<!-- LOSOWY MEM -->
+<h2>Losowy mem dnia</h2>
+<img id="randomMeme" width="400" class="zoom" onclick="pokaz(this.src)">
+<br>
+<button id="losujBtn"> Losuj mem</button>
+
+<!-- GALERIA MEMÓW -->
 <div class="galeria">
-
-<img src="memy/Meme1.jpg" alt="Meme1" class="zoom">
-<img src="memy/Meme2.jpg" alt="Meme2" class="zoom">
-<img src="memy/Meme3.jpg" alt="Meme3" class="zoom">
-<img src="memy/Meme4.jpg" alt="Meme4" class="zoom">
-<img src="memy/Meme5.jpg" alt="Meme5" class="zoom">
-<img src="memy/Meme6.jpg" alt="Meme6" class="zoom">
-<img src="memy/Meme7.jpg" alt="Meme7" class="zoom">
-<img src="memy/Meme8.jpg" alt="Meme8" class="zoom">
-<img src="memy/Meme9.jpg" alt="Meme9" class="zoom">
-<img src="memy/Meme10.jpg" alt="Meme10" class="zoom">
-
+    <img src="memy/Meme1.jpg" alt="Meme1" class="zoom" onclick="pokaz(this.src)">
+    <img src="memy/Meme2.jpg" alt="Meme2" class="zoom" onclick="pokaz(this.src)">
+    <img src="memy/Meme3.jpg" alt="Meme3" class="zoom" onclick="pokaz(this.src)">
+    <img src="memy/Meme4.jpg" alt="Meme4" class="zoom" onclick="pokaz(this.src)">
+    <img src="memy/Meme5.jpg" alt="Meme5" class="zoom" onclick="pokaz(this.src)">
+    <img src="memy/Meme6.jpg" alt="Meme6" class="zoom" onclick="pokaz(this.src)">
+    <img src="memy/Meme7.jpg" alt="Meme7" class="zoom" onclick="pokaz(this.src)">
+    <img src="memy/Meme8.jpg" alt="Meme8" class="zoom" onclick="pokaz(this.src)">
+    <img src="memy/Meme9.jpg" alt="Meme9" class="zoom" onclick="pokaz(this.src)">
+    <img src="memy/Meme10.jpg" alt="Meme10" class="zoom" onclick="pokaz(this.src)">
 </div>
 
+<!-- LIGHTBOX -->
 <div id="lightbox" onclick="zamknij()">
     <img id="bigimg">
 </div>
+
+<script>
+    // TABLICA MEMÓW
+    let memy = [
+        "memy/Meme1.jpg",
+        "memy/Meme2.jpg",
+        "memy/Meme3.jpg",
+        "memy/Meme4.jpg",
+        "memy/Meme5.jpg",
+        "memy/Meme6.jpg",
+        "memy/Meme7.jpg",
+        "memy/Meme8.jpg",
+        "memy/Meme9.jpg",
+        "memy/Meme10.jpg"
+    ];
+
+    // LOSOWY MEM PRZY ODŚWIEŻENIU
+    let losowy = Math.floor(Math.random()*memy.length);
+    document.getElementById("randomMeme").src = memy[losowy];
+
+    // PRZYCISK LOSUJ MEM
+    const losujBtn = document.getElementById("losujBtn");
+    losujBtn.addEventListener("click", function(){
+        let nowyLosowy = Math.floor(Math.random()*memy.length);
+        document.getElementById("randomMeme").src = memy[nowyLosowy];
+    });
+
+    // FUNKCJE LIGHTBOX
+    function pokaz(src){
+        document.getElementById("lightbox").style.display = "flex";
+        document.getElementById("bigimg").src = src;
+    }
+
+    function zamknij(){
+        document.getElementById("lightbox").style.display = "none";
+    }
+</script>
 
 </body>
 </html>
