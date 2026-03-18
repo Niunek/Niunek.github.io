@@ -1,6 +1,25 @@
-    body{
-       background-color: lightgray;
+    body {
+    background-color: lightblue;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    animation-name: myAnimation;
+    animation-duration: 40s;
+}
+@keyframes myAnimation {
+    0% {
+        background-color: red;
     }
+    25% {
+        background-color: yellow;
+    }
+    50% {
+        background-color: blue;
+    }
+    100% {
+        background-color: green;
+    }
+}
 h1 {
     animation: color-change 3s infinite;
 }
