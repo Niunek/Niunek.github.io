@@ -1,0 +1,6 @@
+    body{
+       background-color: lightgray;
+    }
+h1 {
+    animation: color-change 3s infinite;
+}
