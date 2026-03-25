@@ -2,109 +2,167 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <title>Smoczki</title>
 
 <style>
-    .zoom{
-        transition: transform 0.3s;
-    }
 
-    .zoom:hover{
-        transform: scale(1.1);
-    }
-    .social-container{
-    text-align:center;
-    padding:60px 20px;
+.zoom{
+transition: transform 0.3s;
+}
+
+.zoom:hover{
+transform: scale(1.1);
+}
+
+/* animowane tło */
+
+#particles{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+z-index:-1;
+}
+
+/* social media */
+
+.social-container{
+text-align:center;
+padding:60px 20px;
 }
 
 .social-container h2{
-    font-size:32px;
-    margin-bottom:40px;
+font-size:32px;
+margin-bottom:40px;
 }
 
 .social-grid{
-    display:flex;
-    justify-content:center;
-    gap:30px;
-    flex-wrap:wrap;
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
 }
 
 .social-card{
-    width:160px;
-    height:160px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-decoration:none;
-    color:white;
-    border-radius:20px;
-    font-size:22px;
-    transition:0.3s;
-    background:#1a1a1a;
+width:160px;
+height:160px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-decoration:none;
+color:white;
+border-radius:20px;
+font-size:22px;
+transition:0.3s;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(10px);
 }
 
 .social-card i{
-    font-size:50px;
-    margin-bottom:10px;
+font-size:50px;
+margin-bottom:10px;
 }
 
 .social-card:hover{
-    transform:translateY(-10px) scale(1.05);
+transform:translateY(-10px) scale(1.05);
 }
 
-/* kolory glow */
+/* glow */
 
 .youtube:hover{
-    box-shadow:0 0 25px #ff0000;
+box-shadow:0 0 25px #ff0000;
 }
 
 .instagram:hover{
-    box-shadow:0 0 25px #e1306c;
+box-shadow:0 0 25px #e1306c;
 }
 
 .discord:hover{
-    box-shadow:0 0 25px #5865F2;
+box-shadow:0 0 25px #5865F2;
 }
+
+/* przycisk */
+
+.subscribe{
+display:inline-block;
+margin-top:40px;
+padding:12px 30px;
+border-radius:30px;
+background:linear-gradient(45deg,#ff0000,#ff4d4d);
+color:white;
+text-decoration:none;
+font-size:18px;
+transition:0.3s;
+}
+
+.subscribe:hover{
+transform:scale(1.1);
+box-shadow:0 0 20px #ff0000;
+}
+
+/* telefon */
+
+@media (max-width:600px){
+
+.social-card{
+width:120px;
+height:120px;
+}
+
+.social-card i{
+font-size:35px;
+}
+
+}
+
 </style>
+
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    
+
+<div id="particles"></div>
+
 <h1>Smoczki</h1>
-<p>  
-Strona ze smoczkami
-</p>
-<p>
-Kliknij na uśmiechniętego czarnego smoka żeby otworzyc memy
-</p>
-<a href = "stronka2" ><img src = "smoki/smoczek.jpg" alt = "Śmieszny smoczek"></a>
-<img src = "smoki/NFdance.jpg" alt = "Tańczący smok" width="300" height="400" class="zoom">
-<img src = "smoki/BFdance.jpg" alt = "Tańczący smok"width="300" height="400" class="zoom">
-<img src = "smoki/NFsing.jpg" alt = "Śpiewający smok"width="300" height="200" class="zoom">
-<img src = "smoki/BFsing.jpg" alt = "Śpiewający smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok1.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok2.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok3.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok4.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok5.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok6.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok7.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok8.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok9.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok10.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok11.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok12.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok13.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok14.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok15.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok16.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok17.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok18.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
-<img src = "smoki/Smok19.jpg" alt = "Smok"width="300" height="200" class="zoom"> 
+
+<p>Strona ze smoczkami</p>
+
+<p>Kliknij na uśmiechniętego czarnego smoka żeby otworzyc memy</p>
+
+<a href="stronka2">
+<img src="smoki/smoczek.jpg" alt="Śmieszny smoczek">
 </a>
+
+<img src="smoki/NFdance.jpg" alt="Tańczący smok" width="300" height="400" class="zoom">
+<img src="smoki/BFdance.jpg" alt="Tańczący smok" width="300" height="400" class="zoom">
+<img src="smoki/NFsing.jpg" alt="Śpiewający smok" width="300" height="200" class="zoom">
+<img src="smoki/BFsing.jpg" alt="Śpiewający smok" width="300" height="200" class="zoom">
+
+<img src="smoki/Smok1.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok2.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok3.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok4.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok5.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok6.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok7.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok8.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok9.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok10.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok11.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok12.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok13.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok14.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok15.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok16.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok17.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok18.jpg" width="300" height="200" class="zoom">
+<img src="smoki/Smok19.jpg" width="300" height="200" class="zoom">
+
 <div class="social-container">
 
 <h2>Znajdziesz mnie tutaj</h2>
@@ -128,14 +186,26 @@ Kliknij na uśmiechniętego czarnego smoka żeby otworzyc memy
 
 </div>
 
+<a href="https://www.youtube.com/@Niunek_7" class="subscribe" target="_blank">
+Subskrybuj kanał
+</a>
+
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+<script>
+particlesJS("particles",{
+particles:{
+number:{value:80},
+size:{value:3},
+move:{speed:1},
+line_linked:{enable:true},
+color:{value:"#ffffff"}
+}
+});
+</script>
+
 </body>
 
-
 </html>
-
-
-
-
-
-
