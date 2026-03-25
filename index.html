@@ -118,12 +118,68 @@ font-size:35px;
 }
 
 }
+/* Minecraft Server Card */
+.server-card {
+  background: #2c2f33;
+  border: 3px solid #00ff00;
+  border-radius: 12px;
+  padding: 20px 30px;
+  max-width: 400px;
+  text-align: center;
+  cursor: pointer;
+  margin: 40px auto;
+  transition: transform 0.2s;
+}
 
+.server-card:hover {
+  transform: scale(1.05);
+}
+
+.server-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #00ff00;
+  text-shadow: 1px 1px 0 #000;
+  margin-bottom: 10px;
+}
+
+.server-description {
+  display: none;
+  margin-top: 15px;
+  background-color: #222;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+/* Animacja fade-in */
+.show {
+  display: block;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+/* Minecraft pixel font */
+@font-face {
+  font-family: 'Minecraft';
+  src: url('https://fonts.cdnfonts.com/s/9850/Minecraft.woff') format('woff');
+}
 </style>
 
 <link rel="stylesheet" href="style.css">
 </head>
-
+<script>
+function toggleDescription() {
+  const desc = document.getElementById('server-desc');
+  desc.classList.toggle('show');
+}
+</script>
 <body>
 
 <div id="particles"></div>
@@ -142,7 +198,6 @@ font-size:35px;
 <img src="smoki/BFdance.jpg" alt="Tańczący smok" width="300" height="400" class="zoom">
 <img src="smoki/NFsing.jpg" alt="Śpiewający smok" width="300" height="200" class="zoom">
 <img src="smoki/BFsing.jpg" alt="Śpiewający smok" width="300" height="200" class="zoom">
-
 <img src="smoki/Smok1.jpg" width="300" height="200" class="zoom">
 <img src="smoki/Smok2.jpg" width="300" height="200" class="zoom">
 <img src="smoki/Smok3.jpg" width="300" height="200" class="zoom">
@@ -162,6 +217,18 @@ font-size:35px;
 <img src="smoki/Smok17.jpg" width="300" height="200" class="zoom">
 <img src="smoki/Smok18.jpg" width="300" height="200" class="zoom">
 <img src="smoki/Smok19.jpg" width="300" height="200" class="zoom">
+
+<!-- Minecraft Server Section -->
+<div class="server-card" onclick="toggleDescription()">
+  <div class="server-title">▶ Zapraszam na serwer Minecraft</div>
+  <div class="server-description" id="server-desc">
+    <strong>Nazwa:</strong> Fantasy.SMP<br>
+    <strong>IP:</strong> tam<br>
+    <strong>Wersja:</strong> 1.21.11<br>
+    <strong>Discord:</strong> wkrótce
+  </div>
+</div>
+<!-- Koniec sekcji Minecraft -->
 
 <div class="social-container">
 
