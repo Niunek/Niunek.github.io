@@ -170,6 +170,29 @@ font-size:35px;
   font-family: 'Minecraft';
   src: url('https://fonts.cdnfonts.com/s/9850/Minecraft.woff') format('woff');
 }
+/* NAVBAR */
+.navbar{
+position:sticky;
+top:0;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+padding:15px;
+display:flex;
+justify-content:center;
+gap:40px;
+z-index:10;
+}
+
+.navbar a{
+color:white;
+text-decoration:none;
+font-size:18px;
+transition:0.3s;
+}
+
+.navbar a:hover{
+color:#00ffcc;
+}
 </style>
 
 <link rel="stylesheet" href="style.css">
@@ -182,10 +205,15 @@ function toggleDescription() {
 </script>
 <body>
 
+<nav class="navbar">
+<a href="#">Strona główna</a>
+<a href="#server">Serwer</a>
+<a href="#social">Sociale</a>
+</nav>
+
 <div id="particles"></div>
 
 <h1>Smoczki</h1>
-
 <p>Strona ze smoczkami</p>
 
 <p>Kliknij na uśmiechniętego czarnego smoka żeby otworzyc memy</p>
@@ -219,7 +247,7 @@ function toggleDescription() {
 <img src="smoki/Smok19.jpg" width="300" height="200" class="zoom">
 <img src="https://hitwebcounter.com/counter/counter.php?page=12345678&style=0006&nbdigits=5&type=page&initCount=0">
 <!-- Minecraft Server Section -->
-<div class="server-card" onclick="toggleDescription()">
+<div class="server-card" id="server" onclick="toggleDescription()">
   <div class="server-title">▶ Zapraszam na serwer Minecraft</div>
   <div class="server-description" id="server-desc">
     <strong>Nazwa:</strong> Fantasy.SMP<br>
@@ -230,7 +258,7 @@ function toggleDescription() {
 </div>
 <!-- Koniec sekcji Minecraft -->
 
-<div class="social-container">
+<div class="social-container" id="social">
 
 <h2>Znajdziesz mnie tutaj</h2>
 
