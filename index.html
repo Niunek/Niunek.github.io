@@ -256,6 +256,42 @@ opacity:0.9;
   background-color:deepskyblue;
   transform:scale(1.1);
 }
+/* ENCYKLOPEDIA BUTTON */
+.encyklopedia-btn{
+  padding: 8px 18px;
+  border-radius: 20px;
+  background: linear-gradient(45deg,#00f7ff,#ff00c8);
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* glow efekt */
+.encyklopedia-btn:hover{
+  transform: scale(1.1);
+  box-shadow: 
+    0 0 10px #00f7ff,
+    0 0 20px #ff00c8,
+    0 0 40px #ff00c8;
+}
+
+/* animowana linia */
+.encyklopedia-btn::after{
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background: white;
+  transition: 0.3s;
+}
+
+.encyklopedia-btn:hover::after{
+  width: 100%;
+}
 </style>
 
 <link rel="stylesheet" href="style.css">
@@ -273,6 +309,7 @@ function toggleDescription() {
 <a href="#server">Serwer</a>
 <a href="#social">Sociale</a>
 <a href="#meme">Memy</a>
+<a href="smoki.html" class="encyklopedia-btn"> Księga Smoków</a>
 </nav>
 
 <div id="particles"></div>

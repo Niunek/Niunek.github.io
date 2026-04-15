@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Księga Smoków</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial;
+  background: #0b1220;
+  color: #e2e8f0;
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  padding: 25px;
+  font-size: 38px;
+  font-weight: bold;
+  border-bottom: 1px solid #334155;
+  background: linear-gradient(90deg, #00f7ff, #ff00c8);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* SEARCH */
+.search-box {
+  text-align: center;
+  margin: 20px;
+}
+
+.search-box input {
+  padding: 12px;
+  width: 60%;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #020617;
+  color: white;
+}
+
+/* GRID */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* CARD */
+.dragon-card {
+  background: #020617;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+}
+
+.dragon-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px #00f7ff33;
+}
+
+.dragon-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+/* HEADER CARD */
+.card-top {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dragon-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* BADGE */
+.badge {
+  background: #1e293b;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+/* FAVORITE */
+.fav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.fav.active {
+  color: red;
+}
+
+/* INFO */
+.dragon-info {
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.4s;
+  padding: 0 10px;
+}
+
+.dragon-card.active .dragon-info {
+  max-height: 400px;
+}
+
+/* SEKCJE */
+.section {
+  margin: 10px 0;
+  padding: 10px;
+  background: #0f172a;
+  border-radius: 8px;
+}
+
+/* POWER BAR */
+.power-bar {
+  height: 8px;
+  background: #1e293b;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.power-fill {
+  height: 100%;
+  width: 70%; /* zmień */
+  background: linear-gradient(90deg, #00f7ff, #ff00c8);
+}
+
+/* STARS */
+.stars {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.star {
+  cursor: pointer;
+  color: gray;
+}
+
+.star.active {
+  color: gold;
+}
+</style>
+</head>
+
+<body>
+
+<header>📖 Księga Smoków</header>
+
+<div class="search-box">
+  <input type="text" id="search" placeholder="Szukaj smoka...">
+</div>
+
+<div class="container">
+
+  <!-- SMOK -->
+  <div class="dragon-card" data-name="(nazwa smoka)">
+    <div class="fav">❤️</div>
+    <img src="(zdjęcie)">
+
+    <div class="card-top">
+      <div class="dragon-name">(nazwa smoka)</div>
+      <div class="badge">(typ smoka)</div>
+    </div>
+
+    <div class="dragon-info">
+
+      <div class="section">
+        ⚔️ <b>Atak:</b> (atak)
+      </div>
+
+      <div class="section">
+        🍖 <b>Pokarm:</b> (pokarm)
+      </div>
+
+      <div class="section">
+        📊 <b>Moc:</b>
+        <div class="power-bar">
+          <div class="power-fill"></div>
+        </div>
+      </div>
+
+      <div class="section">
+        ⭐ <b>Ocena:</b>
+        <div class="stars">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+// rozwijanie
+document.querySelectorAll(".dragon-card").forEach(card => {
+  card.addEventListener("click", () => {
+    card.classList.toggle("active");
+  });
+});
+
+// search
+document.getElementById("search").addEventListener("input", function() {
+  const value = this.value.toLowerCase();
+  document.querySelectorAll(".dragon-card").forEach(card => {
+    card.style.display = card.dataset.name.toLowerCase().includes(value)
+      ? "block" : "none";
+  });
+});
+
+// gwiazdki
+document.querySelectorAll(".stars").forEach(box => {
+  const stars = box.querySelectorAll(".star");
+  stars.forEach((star, i) => {
+    star.addEventListener("click", (e) => {
+      e.stopPropagation();
+      stars.forEach((s, j) => {
+        s.classList.toggle("active", j <= i);
+      });
+    });
+  });
+});
+
+// ulubione
+document.querySelectorAll(".dragon-card").forEach(card => {
+  const fav = card.querySelector(".fav");
+  const name = card.dataset.name;
+
+  if (localStorage.getItem(name)) fav.classList.add("active");
+
+  fav.addEventListener("click", (e) => {
+    e.stopPropagation();
+    fav.classList.toggle("active");
+
+    if (fav.classList.contains("active")) {
+      localStorage.setItem(name, "1");
+    } else {
+      localStorage.removeItem(name);
+    }
+  });
+});
+</script>
+
+</body>
+</html>
