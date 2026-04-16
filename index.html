@@ -1,128 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 
 <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<title>Smoczki</title>
+  <meta charset="UTF-8">
+  <title>Smoczki</title>
 
-<link rel="stylesheet" href="index-style.css">
+  <link rel="stylesheet" href="index-style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
 </head>
-<script>
-function toggleDescription() {
-  const desc = document.getElementById('server-desc');
-  desc.classList.toggle('show');
-}
-</script>
+
 <body>
 
-
-
+<!-- MENU KSIĄŻKA -->
 <div class="book-menu">
   <button class="book-toggle" onclick="toggleMenu()">📖 Menu</button>
 
   <div id="bookPanel" class="book-panel">
     <a href="index.html" class="book-btn">🏠 Strona główna</a>
     <a href="smoki.html" class="book-btn">🐉 Encyklopedia smoków</a>
-    <a href="stronka2" class="book-btn">😂 Memy</a>
+    <a href="stronka2.html" class="book-btn">😂 Memy</a>
   </div>
 </div>
 
-<a href="stronka2">
-<img src="smoki/smoczek.jpg" alt="Śmieszny smoczek">
+<!-- TŁO -->
+<div id="particles"></div>
+
+<!-- TYTUŁ -->
+<h1 class="gaming-title">Królestwo Smoków</h1>
+<p class="subtitle">Smoki, memy i serwer Minecraft</p>
+
+<!-- OBRAZKI -->
+<a href="stronka2.html">
+  <img src="smoki/smoczek.jpg" width="300">
 </a>
 
-<img src="smoki/NFdance.jpg" width="300" height="200" class="zoom">
-<img src="smoki/BFdance.jpg" width="300" height="200" class="zoom">
-<img src="smoki/NFsing.jpg" width="300" height="200" class="zoom">
-<img src="smoki/BFsing.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok1.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok2.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok3.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok4.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok5.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok6.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok7.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok8.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok9.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok10.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok11.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok12.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok13.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok14.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok15.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok16.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok17.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok18.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok19.jpg" width="300" height="200" class="zoom">
+<div class="gallery">
+  <img src="smoki/NFdance.jpg" class="zoom">
+  <img src="smoki/BFdance.jpg" class="zoom">
+  <img src="smoki/NFsing.jpg" class="zoom">
+  <img src="smoki/BFsing.jpg" class="zoom">
+</div>
 
-<!-- Minecraft Server Section -->
-<div class="server-card" id="server" onclick="toggleDescription()">
-  <div class="server-title">▶ Zapraszam na serwer Minecraft</div>
-  <div class="server-description" id="server-desc">
-    <strong>Nazwa:</strong> Fantasy.SMP<br>
-    <strong>IP:</strong> 146.103.49.18<br>
-    <strong>Wersja:</strong> 1.21.11<br>
-    <strong>Discord:</strong> wkrótce
+<!-- SERWER -->
+<div class="server-card" onclick="toggleDescription()">
+  <div class="server-title">▶ Serwer Minecraft</div>
+  <div id="server-desc" class="server-description">
+    <b>Nazwa:</b> Fantasy.SMP<br>
+    <b>IP:</b> 146.103.49.18<br>
+    <b>Wersja:</b> 1.21.11
   </div>
 </div>
-<!-- Koniec sekcji Minecraft -->
-<div class="mem-section" id="meme"></div>
 
-  <h2>Zobacz też memy</h2>
-  <p>Na mojej stronie są też śmieszne memy 😎</p>
-
-  <a href="stronka2">
-    <button class="mem-button">Przejdź do memów</button>
+<!-- MEMY -->
+<div class="mem-section">
+  <h2>Zobacz memy</h2>
+  <a href="stronka2.html">
+    <button class="mem-button">Przejdź</button>
   </a>
-
-
-<div class="social-container" id="social">
-
-<h2>Znajdziesz mnie tutaj</h2>
-
-<div class="social-grid">
-
-<a href="https://www.youtube.com/@Niunek_7" target="_blank" class="social-card youtube">
-<i class="fab fa-youtube"></i>
-<span>YouTube</span>
-</a>
-
-<a href="https://www.instagram.com/niunek_/" target="_blank" class="social-card instagram">
-<i class="fab fa-instagram"></i>
-<span>Instagram</span>
-</a>
-
-<a href="https://discord.com/channels/@me" target="_blank" class="social-card discord">
-<i class="fab fa-discord"></i>
-<span>Discord</span>
-</a>
-
 </div>
 
-<a href="https://www.youtube.com/@Niunek_7" class="subscribe" target="_blank">
-Subskrybuj kanał
-</a>
+<!-- SOCIAL -->
+<div class="social-container">
+  <h2>Sociale</h2>
 
+  <div class="social-grid">
+    <a class="social-card youtube" href="https://youtube.com">
+      <i class="fab fa-youtube"></i>
+      YouTube
+    </a>
+
+    <a class="social-card instagram" href="https://instagram.com">
+      <i class="fab fa-instagram"></i>
+      Instagram
+    </a>
+
+    <a class="social-card discord" href="https://discord.com">
+      <i class="fab fa-discord"></i>
+      Discord
+    </a>
+  </div>
 </div>
 
+<!-- SCRIPTY -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
 <script>
-particlesJS("particles",{
-particles:{
-number:{value:80},
-size:{value:3},
-move:{speed:1},
-line_linked:{enable:true},
-color:{value:"#ffffff"}
+function toggleDescription() {
+  document.getElementById("server-desc").classList.toggle("show");
 }
-});
+
 function toggleMenu() {
-  const panel = document.getElementById("bookPanel");
-  panel.classList.toggle("active");
+  document.getElementById("bookPanel").classList.toggle("active");
 }
+
+particlesJS("particles", {
+  particles: {
+    number: { value: 60 },
+    size: { value: 3 },
+    move: { speed: 1 }
+  }
+});
 </script>
 
 </body>
-
 </html>
