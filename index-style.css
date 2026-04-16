@@ -104,34 +104,52 @@ body {
 /* MENU */
 .book-menu {
   position: fixed;
-  top: 10px;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* PRZYCISK */
 .book-toggle {
-  padding: 10px;
+  padding: 10px 20px;
   background: purple;
   color: white;
   border: none;
   cursor: pointer;
+  border-radius: 0 0 12px 12px;
 }
 
+/* PANEL (WYSUWANY) */
 .book-panel {
   display: flex;
   flex-direction: column;
   background: #111;
+  width: 200px;
+  text-align: center;
+
   transform: translateY(-200%);
   transition: 0.4s;
+  border-radius: 0 0 12px 12px;
 }
 
+/* AKTYWNY PANEL */
 .book-panel.active {
   transform: translateY(0);
 }
 
+/* PRZYCISKI W MENU */
 .book-btn {
   padding: 10px;
   color: white;
   text-decoration: none;
+  border-bottom: 1px solid #222;
+}
+
+.book-btn:hover {
+  background: #333;
 }
