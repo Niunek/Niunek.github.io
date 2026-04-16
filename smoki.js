@@ -8,11 +8,11 @@ const smoki = [
     zdjecie: "smoki/szczerbatek.jpg"
   },
   {
-    nazwa: "Monstrous Nightmare",
-    typ: "Monstrous Nightmare",
-    atak: "Ogień + podpalenie ciała",
+    nazwa: "Biała Furia",
+    typ: "Biała furia",
+    atak: "Plazmowe strzały",
     pokarm: "Mięso",
-    moc: 85,
-    zdjecie: "smoki/hookfang.jpg"
+    moc: 90,
+    zdjecie: "księga_smoków/nocna_furia.jpg"
   }
 ];
