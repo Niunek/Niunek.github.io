@@ -14,16 +14,16 @@ const smoki = [
     pokarm: "Ryby",
     moc: 96,
     zdjecie: "ksismoków/biała_furia.jpg"
-  }
-{
+  },
+  {
     nazwa: "Burzochlast",
     typ: "Mystery Class",
     atak: "Precyzyjne ataki z powietrza",
     pokarm: "Ryby",
     moc: 88,
     zdjecie: "ksismoków/Burzochlast.jpg"
-  }
-    {
+  },
+  {
     nazwa: "Elita",
     typ: "Alpha Class",
     atak: "Gigantyczny strumień lodu",
