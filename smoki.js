@@ -30,7 +30,7 @@ const smoki = [
     pokarm: "Duże stworzenia morskie",
     moc: 98,
     zdjecie: "ksismoków/elita.jpg"
-  }
+  },
   {
     nazwa: "Eruptodon",
     typ: "Boulder Class",

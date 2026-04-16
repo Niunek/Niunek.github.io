@@ -1,0 +1,346 @@
+
+
+.zoom{
+transition: transform 0.3s;
+}
+
+.zoom:hover{
+transform: scale(1.1);
+}
+
+/* animowane tło */
+
+#particles{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+z-index:-1;
+}
+
+/* social media */
+
+.social-container{
+text-align:center;
+padding:60px 20px;
+}
+
+.social-container h2{
+font-size:32px;
+margin-bottom:40px;
+}
+
+.social-grid{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+}
+
+.social-card{
+width:160px;
+height:160px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-decoration:none;
+color:white;
+border-radius:20px;
+font-size:22px;
+transition:0.3s;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(10px);
+}
+
+.social-card i{
+font-size:50px;
+margin-bottom:10px;
+}
+
+.social-card:hover{
+transform:translateY(-10px) scale(1.05);
+}
+
+/* glow */
+
+.youtube:hover{
+box-shadow:0 0 25px #ff0000;
+}
+
+.instagram:hover{
+box-shadow:0 0 25px #e1306c;
+}
+
+.discord:hover{
+box-shadow:0 0 25px #5865F2;
+}
+
+/* przycisk */
+
+.subscribe{
+display:inline-block;
+margin-top:40px;
+padding:12px 30px;
+border-radius:30px;
+background:linear-gradient(45deg,#ff0000,#ff4d4d);
+color:white;
+text-decoration:none;
+font-size:18px;
+transition:0.3s;
+}
+
+.subscribe:hover{
+transform:scale(1.1);
+box-shadow:0 0 20px #ff0000;
+}
+
+/* telefon */
+
+@media (max-width:600px){
+
+.social-card{
+width:120px;
+height:120px;
+}
+
+.social-card i{
+font-size:35px;
+}
+
+}
+/* Minecraft Server Card */
+.server-card {
+  background: #2c2f33;
+  border: 3px solid #00ff00;
+  border-radius: 12px;
+  padding: 20px 30px;
+  max-width: 400px;
+  text-align: center;
+  cursor: pointer;
+  margin: 40px auto;
+  transition: transform 0.2s;
+}
+
+.server-card:hover {
+  transform: scale(1.05);
+}
+
+.server-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #00ff00;
+  text-shadow: 1px 1px 0 #000;
+  margin-bottom: 10px;
+}
+
+.server-description {
+  display: none;
+  margin-top: 15px;
+  background-color: #222;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+/* Animacja fade-in */
+.show {
+  display: block;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+/* Minecraft pixel font */
+@font-face {
+  font-family: 'Minecraft';
+  src: url('https://fonts.cdnfonts.com/s/9850/Minecraft.woff') format('woff');
+}
+/* NAVBAR */
+.navbar{
+position:sticky;
+top:0;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+padding:15px;
+display:flex;
+justify-content:center;
+gap:40px;
+z-index:10;
+}
+
+.navbar a{
+color:white;
+text-decoration:none;
+font-size:18px;
+transition:0.3s;
+}
+
+.navbar a:hover{
+color:#00ffcc;
+}
+/* GAMING TITLE */
+
+.gaming-title{
+font-family:'Orbitron', sans-serif;
+font-size:80px;
+text-align:center;
+font-weight:900;
+letter-spacing:5px;
+margin-top:40px;
+color:#00ffff;
+
+text-shadow:
+0 0 5px #00ffff,
+0 0 10px #00ffff,
+0 0 20px #00ffff,
+0 0 40px #00ffff;
+
+animation: glow 2s infinite alternate;
+}
+
+/* animacja świecenia */
+
+@keyframes glow{
+from{
+text-shadow:
+0 0 5px #00ffff,
+0 0 10px #00ffff,
+0 0 20px #00ffff;
+}
+to{
+text-shadow:
+0 0 10px #00ffff,
+0 0 20px #00ffff,
+0 0 40px #00ffff,
+0 0 80px #00ffff;
+}
+}
+
+.subtitle{
+text-align:center;
+font-size:22px;
+margin-top:-10px;
+opacity:0.9;
+}
+.mem-section{
+  text-align:center;
+  margin-top:50px;
+}
+
+.mem-button{
+  background-color:cyan;
+  border:none;
+  padding:15px 30px;
+  font-size:20px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.mem-button:hover{
+  background-color:deepskyblue;
+  transform:scale(1.1);
+}
+/* ENCYKLOPEDIA BUTTON */
+.encyklopedia-btn{
+  padding: 8px 18px;
+  border-radius: 20px;
+  background: linear-gradient(45deg,#00f7ff,#ff00c8);
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* glow efekt */
+.encyklopedia-btn:hover{
+  transform: scale(1.1);
+  box-shadow: 
+    0 0 10px #00f7ff,
+    0 0 20px #ff00c8,
+    0 0 40px #ff00c8;
+}
+
+/* animowana linia */
+.encyklopedia-btn::after{
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background: white;
+  transition: 0.3s;
+}
+
+.encyklopedia-btn:hover::after{
+  width: 100%;
+}
+/* CAŁY PANELEK */
+.book-menu {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  text-align: center;
+}
+
+/* PRZYCISK NA GÓRZE */
+.book-toggle {
+  background: linear-gradient(45deg,#00f7ff,#ff00c8);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 0 0 15px 15px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 10px #00f7ff;
+  transition: 0.3s;
+}
+
+.book-toggle:hover {
+  transform: scale(1.05);
+}
+
+/* PANEL ZJEŻDŻAJĄCY */
+.book-panel {
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  padding: 15px;
+  border-radius: 0 0 20px 20px;
+
+  transform: translateY(-200%);
+  transition: 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* AKTYWNY PANEL */
+.book-panel.active {
+  transform: translateY(0);
+}
+
+/* PRZYCISKI W PANELU */
+.book-btn {
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  background: #111827;
+  transition: 0.3s;
+}
+
+.book-btn:hover {
+  background: #00f7ff;
+  color: black;
+}
