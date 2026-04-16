@@ -369,7 +369,7 @@ function toggleDescription() {
 <a href="#server">Serwer</a>
 <a href="#social">Sociale</a>
 <a href="#meme">Memy</a>
-<button class="book-toggle" onclick="toggleMenu()">📖 Menu</button>
+<button class="book-toggle" onclick="scrollToSocials()">⬇ Menu</button>
 </nav>
 
 <div id="particles"></div>
@@ -433,7 +433,9 @@ function toggleDescription() {
 
 
 <div class="social-container" id="social">
-
+<a href="/smoki.html" class="subscribe">
+Przejdź do biblioteki Smoków
+</a>
 <h2>Znajdziesz mnie tutaj</h2>
 
 <div class="social-grid">
@@ -474,7 +476,13 @@ color:{value:"#ffffff"}
 }
 });
 </script>
-
+<script>
+function scrollToSocials() {
+  document.getElementById("social").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+</script>
 </body>
 
 </html>
