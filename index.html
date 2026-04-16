@@ -292,6 +292,66 @@ opacity:0.9;
 .encyklopedia-btn:hover::after{
   width: 100%;
 }
+/* CAŁY PANELEK */
+.book-menu {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  text-align: center;
+}
+
+/* PRZYCISK NA GÓRZE */
+.book-toggle {
+  background: linear-gradient(45deg,#00f7ff,#ff00c8);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 0 0 15px 15px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 10px #00f7ff;
+  transition: 0.3s;
+}
+
+.book-toggle:hover {
+  transform: scale(1.05);
+}
+
+/* PANEL ZJEŻDŻAJĄCY */
+.book-panel {
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  padding: 15px;
+  border-radius: 0 0 20px 20px;
+
+  transform: translateY(-200%);
+  transition: 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* AKTYWNY PANEL */
+.book-panel.active {
+  transform: translateY(0);
+}
+
+/* PRZYCISKI W PANELU */
+.book-btn {
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  background: #111827;
+  transition: 0.3s;
+}
+
+.book-btn:hover {
+  background: #00f7ff;
+  color: black;
+}
 </style>
 
 <link rel="stylesheet" href="style.css">
@@ -309,7 +369,7 @@ function toggleDescription() {
 <a href="#server">Serwer</a>
 <a href="#social">Sociale</a>
 <a href="#meme">Memy</a>
-<a href="smoki.html" class="encyklopedia-btn"> Księga Smoków</a>
+<button class="book-toggle" onclick="toggleMenu()">📖 Menu</button>
 </nav>
 
 <div id="particles"></div>
