@@ -1,11 +1,11 @@
 body {
   margin: 0;
   font-family: Arial;
-  color: white;
   background: black;
+  color: white;
 }
 
-/* TŁO */
+/* PARTICLES */
 #particles {
   position: fixed;
   width: 100%;
@@ -15,8 +15,8 @@ body {
   left: 0;
 }
 
-/* TYTUŁ */
-.gaming-title {
+/* TITLE */
+.title {
   text-align: center;
   font-size: 60px;
   font-family: Orbitron;
@@ -29,8 +29,24 @@ body {
   opacity: 0.8;
 }
 
-/* ZOOM */
+/* CENTER IMAGE */
+.center {
+  text-align: center;
+}
+
+.main-img {
+  width: 250px;
+  border-radius: 10px;
+}
+
+/* GALLERY */
+.gallery {
+  text-align: center;
+  margin-top: 20px;
+}
+
 .zoom {
+  width: 200px;
   transition: 0.3s;
 }
 
@@ -38,76 +54,67 @@ body {
   transform: scale(1.1);
 }
 
-/* GALERIA */
-.gallery {
+/* SERVER */
+.server-card {
+  width: 300px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #222;
+  border-radius: 10px;
+  cursor: pointer;
   text-align: center;
 }
 
-/* SERWER */
-.server-card {
-  background: #222;
-  padding: 20px;
-  margin: 30px auto;
-  width: 300px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.server-description {
+.hidden {
   display: none;
-  margin-top: 10px;
 }
 
-.server-description.show {
+.show {
   display: block;
 }
 
 /* MEMY */
-.mem-section {
+.mem {
   text-align: center;
   margin: 40px;
 }
 
-.mem-button {
+.btn {
   padding: 10px 20px;
-  border: none;
   background: cyan;
+  border: none;
   border-radius: 10px;
 }
 
 /* SOCIAL */
-.social-container {
+.social {
   text-align: center;
-  margin-top: 50px;
 }
 
-.social-grid {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.social-card {
-  padding: 20px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 10px;
-  text-decoration: none;
+.box {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px;
+  background: #333;
   color: white;
+  text-decoration: none;
+  border-radius: 5px;
 }
 
-/* MENU KSIĄŻKA */
+/* MENU */
 .book-menu {
   position: fixed;
-  top: 0;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 9999;
 }
 
 .book-toggle {
+  padding: 10px;
   background: purple;
-  border: none;
-  padding: 10px 20px;
   color: white;
+  border: none;
   cursor: pointer;
 }
 

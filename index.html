@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Smoczki</title>
+  <title>Królestwo Smoków</title>
 
   <link rel="stylesheet" href="index-style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -11,6 +11,9 @@
 </head>
 
 <body>
+
+<!-- TŁO -->
+<div id="particles"></div>
 
 <!-- MENU KSIĄŻKA -->
 <div class="book-menu">
@@ -23,18 +26,16 @@
   </div>
 </div>
 
-<!-- TŁO -->
-<div id="particles"></div>
-
 <!-- TYTUŁ -->
-<h1 class="gaming-title">Królestwo Smoków</h1>
-<p class="subtitle">Smoki, memy i serwer Minecraft</p>
+<h1 class="title">Królestwo Smoków</h1>
+<p class="subtitle">Smoki, memy i Minecraft</p>
 
-<!-- OBRAZKI -->
-<a href="stronka2.html">
-  <img src="smoki/smoczek.jpg" width="300">
-</a>
+<!-- OBRAZEK START -->
+<div class="center">
+  <img src="smoki/smoczek.jpg" class="main-img">
+</div>
 
+<!-- GALERIA -->
 <div class="gallery">
   <img src="smoki/NFdance.jpg" class="zoom">
   <img src="smoki/BFdance.jpg" class="zoom">
@@ -43,55 +44,40 @@
 </div>
 
 <!-- SERWER -->
-<div class="server-card" onclick="toggleDescription()">
-  <div class="server-title">▶ Serwer Minecraft</div>
-  <div id="server-desc" class="server-description">
-    <b>Nazwa:</b> Fantasy.SMP<br>
-    <b>IP:</b> 146.103.49.18<br>
-    <b>Wersja:</b> 1.21.11
+<div class="server-card" onclick="toggleServer()">
+  <h3>▶ Serwer Minecraft</h3>
+
+  <div id="server-desc" class="hidden">
+    IP: 146.103.49.18<br>
+    Wersja: 1.21.11
   </div>
 </div>
 
 <!-- MEMY -->
-<div class="mem-section">
-  <h2>Zobacz memy</h2>
+<div class="mem">
+  <h2>Memy</h2>
   <a href="stronka2.html">
-    <button class="mem-button">Przejdź</button>
+    <button class="btn">Przejdź</button>
   </a>
 </div>
 
 <!-- SOCIAL -->
-<div class="social-container">
-  <h2>Sociale</h2>
-
-  <div class="social-grid">
-    <a class="social-card youtube" href="https://youtube.com">
-      <i class="fab fa-youtube"></i>
-      YouTube
-    </a>
-
-    <a class="social-card instagram" href="https://instagram.com">
-      <i class="fab fa-instagram"></i>
-      Instagram
-    </a>
-
-    <a class="social-card discord" href="https://discord.com">
-      <i class="fab fa-discord"></i>
-      Discord
-    </a>
-  </div>
+<div class="social">
+  <a href="#" class="box">YouTube</a>
+  <a href="#" class="box">Instagram</a>
+  <a href="#" class="box">Discord</a>
 </div>
 
-<!-- SCRIPTY -->
+<!-- JS -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
 <script>
-function toggleDescription() {
-  document.getElementById("server-desc").classList.toggle("show");
+function toggleMenu(){
+  document.getElementById("bookPanel").classList.toggle("active");
 }
 
-function toggleMenu() {
-  document.getElementById("bookPanel").classList.toggle("active");
+function toggleServer(){
+  document.getElementById("server-desc").classList.toggle("show");
 }
 
 particlesJS("particles", {
