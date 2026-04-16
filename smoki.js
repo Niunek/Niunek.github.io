@@ -13,6 +13,6 @@ const smoki = [
     atak: "Plazmowe strzały",
     pokarm: "Mięso",
     moc: 90,
-    zdjecie: "księga_smoków/nocna_furia.jpg"
+    zdjecie: "ksismoków/nocna_furia.jpg"
   }
 ];
