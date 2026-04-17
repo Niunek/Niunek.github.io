@@ -70,7 +70,7 @@ const smoki = [
     pokarm: "Skały",
     moc: 87,
     zdjecie: "ksismoków/zębiróg_zamkogłowy.jpg"
-  }
+  },
   {
     nazwa: "fireworm",
     typ: "Stoker Class",
