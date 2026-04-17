@@ -352,6 +352,50 @@ opacity:0.9;
   background: #00f7ff;
   color: black;
 }
+.center-menu{
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+z-index:999;
+text-align:center;
+}
+
+.menu-btn{
+background: linear-gradient(45deg,#00f7ff,#ff00c8);
+border:none;
+padding:12px 30px;
+border-radius:30px;
+color:white;
+font-size:18px;
+cursor:pointer;
+}
+
+.menu-panel{
+margin-top:10px;
+background:rgba(0,0,0,0.85);
+padding:10px;
+border-radius:15px;
+display:none;
+flex-direction:column;
+}
+
+.menu-panel.active{
+display:flex;
+}
+
+.menu-panel a{
+color:white;
+text-decoration:none;
+padding:10px;
+background:#111;
+border-radius:10px;
+margin:5px 0;
+}
+
+html{
+scroll-behavior:smooth;
+}
 </style>
 
 <link rel="stylesheet" href="style.css">
@@ -364,13 +408,17 @@ function toggleDescription() {
 </script>
 <body>
 
-<nav class="navbar">
-<a href="#">Strona główna</a>
-<a href="#server">Serwer</a>
-<a href="#social">Sociale</a>
-<a href="#meme">Memy</a>
-<button class="book-toggle" onclick="toggleMenu()">📖 Menu</button>
-</nav>
+<div class="center-menu">
+  <button class="menu-btn" onclick="toggleMenu()">☰ MENU</button>
+
+  <div class="menu-panel" id="menuPanel">
+    <a href="#">Strona główna</a>
+    <a href="#server">Serwer</a>
+    <a href="#meme">Memy</a>
+    <a href="#social">Sociale</a>
+    <a href="#social">Biblioteka</a>
+  </div>
+</div>
 
 <div id="particles"></div>
 
