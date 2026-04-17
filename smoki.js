@@ -71,4 +71,52 @@ const smoki = [
     moc: 87,
     zdjecie: "ksismoków/zębiróg_zamkogłowy.jpg"
   }
+  {
+    nazwa: "fireworm",
+    typ: "Stoker Class",
+    atak: "Plucie bardzo gorącym ogniem",
+    pokarm: "Lawa",
+    moc: 60,
+    zdjecie: "ksismoków/fireworm.jpg"
+  },
+  {
+    nazwa: "Flightmare",
+    typ: "Mystery Class",
+    atak: "Paraliżująca mgła",
+    pokarm: "Zwierzęta",
+    moc: 85,
+    zdjecie: "ksismoków/Flightmare.jpg"
+  },
+  {
+    nazwa: "Raincutter",
+    typ: "Sharp Class",
+    atak: "Strzelanie wodą pod wysokim ciśnieniem",
+    pokarm: "Ryby",
+    moc: 88,
+    zdjecie: "ksismoków/raincutter.jpg"
+  },
+  {
+    nazwa: "Razorwhip",
+    typ: "Sharp Class",
+    atak: "Ogon z ostrych „brzytew”",
+    pokarm: "Ryby",
+    moc: 89,
+    zdjecie: "ksismoków/razorwhip.jpg"
+  },  
+  {
+    nazwa: "Skrill",
+    typ: "Strike Class",
+    atak: "Wiązki elektrycznej plazmy",
+    pokarm: "Ryby",
+    moc: 92,
+    zdjecie: "ksismoków/skrill.jpg"
+  },
+  {
+    nazwa: "Windstriker",
+    typ: "Mystery Class",
+    atak: "Generowanie bardzo silnych podmuchów wiatru",
+    pokarm: "Ryby",
+    moc: 86,
+    zdjecie: "ksismoków/windstriker.jpg"
+  }
 ];
