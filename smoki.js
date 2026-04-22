@@ -85,7 +85,7 @@ const smoki = [
     atak: "Paraliżująca mgła",
     pokarm: "Zwierzęta",
     moc: 85,
-    zdjecie: "ksismoków/Flightmare.jpg"
+    zdjecie: "ksismoków/Fligthmare.jpg"
   },
   {
     nazwa: "Raincutter",
