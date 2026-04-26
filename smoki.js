@@ -118,5 +118,21 @@ const smoki = [
     pokarm: "Ryby",
     moc: 86,
     zdjecie: "ksismoków/windstriker.jpg"
+  },
+  {
+    nazwa: "Slitherwing",
+    typ: "Mystery Class",
+    atak: "Drażniący gaz",
+    pokarm: "Małe zwierzęta",
+    moc: 84,
+    zdjecie: "ksismoków/slitherwing.jpg"
+  },
+  {
+    nazwa: "Threadtail",
+    typ: "Sharp Class",
+    atak: "Wystrzeliwuje lepkie, wytrzymałe nici",
+    pokarm: "Ryby",
+    moc: 82,
+    zdjecie: "ksismoków/slitherwing.jpg"
   }
 ];
