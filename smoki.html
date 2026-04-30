@@ -215,6 +215,72 @@ function toggleTheme(){
 /* START */
 renderDragonOfDay();
 render();
+let selected = [];
+
+function addEvents(){
+
+  document.querySelectorAll(".dragon-card").forEach(card => {
+
+    card.addEventListener("click", (e) => {
+
+      const name = card.dataset.name;
+      const dragon = smoki.find(s => s.nazwa === name);
+
+      // toggle selection
+      if(selected.find(s => s.nazwa === name)){
+        selected = selected.filter(s => s.nazwa !== name);
+        card.classList.remove("selected");
+      } else {
+
+        if(selected.length >= 2) return; // max 2
+
+        selected.push(dragon);
+        card.classList.add("selected");
+      }
+
+      // gdy 2 wybrane → walka
+      if(selected.length === 2){
+        startBattle();
+      }
+    });
+
+  });
+
+}
+
+/* WALKA + VS */
+function startBattle(){
+
+  const a = selected[0];
+  const b = selected[1];
+
+  const vs = document.getElementById("vsBox");
+  const box = document.querySelector(".compare-box");
+
+  vs.classList.add("active");
+  box.classList.add("flash");
+
+  setTimeout(()=>{
+    vs.classList.remove("active");
+    box.classList.remove("flash");
+  }, 1000);
+
+  const winner = a.moc > b.moc ? a : b;
+
+  document.getElementById("compareResult").innerHTML = `
+    ⚔️ WALKA<br><br>
+    🐉 ${a.nazwa} (${a.moc}) vs ${b.nazwa} (${b.moc})<br><br>
+    🥇 Wygrywa: <b>${winner.nazwa}</b>
+  `;
+
+  // reset po walce
+  setTimeout(()=>{
+    selected = [];
+    document.querySelectorAll(".dragon-card").forEach(c=>{
+      c.classList.remove("selected");
+    });
+  }, 1500);
+}
 </script>
 
 </body>
