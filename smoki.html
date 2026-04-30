@@ -18,7 +18,25 @@
 <div class="search-box">
   <input type="text" id="search" placeholder="Szukaj smoka...">
 </div>
+<div class="controls">
 
+  <div class="featured-dragon" id="featuredDragon"></div>
+
+  <select id="classFilter">
+    <option value="all">Wszystkie klasy</option>
+  </select>
+
+  <select id="sortSelect">
+    <option value="powerDesc">Najmocniejsze</option>
+    <option value="powerAsc">Najsłabsze</option>
+    <option value="nameAsc">A-Z</option>
+  </select>
+
+  <button onclick="toggleTheme()" class="theme-btn">
+    🌙 / ☀️
+  </button>
+
+</div>
 <div class="container" id="container"></div>
 
 <script src="smoki.js"></script>
