@@ -40,7 +40,7 @@
 
 <!-- WALKA -->
 <div class="compare-box">
-  <button onclick="startBattle()">⚔️ Walka</button>
+  <button onclick="toggleBattleMode()">⚔️ Walka</button>
 
   <div id="vsBox">VS</div>
 
@@ -204,6 +204,54 @@ function toggleTheme(){
 /* START */
 renderDragonOfDay();
 render();
+let selected = [];
+let battleMode = false;
+
+/* TRYB WALKI */
+function toggleBattleMode(){
+  battleMode = !battleMode;
+  selected = [];
+
+  document.querySelectorAll(".dragon-card").forEach(c=>{
+    c.classList.remove("selected");
+  });
+
+  alert(battleMode ? "⚔️ TRYB WALKI WŁĄCZONY" : "ℹ️ TRYB NORMALNY");
+}
+
+/* EVENTY */
+function addEvents(){
+
+  document.querySelectorAll(".dragon-card").forEach(card => {
+
+    card.onclick = () => {
+
+      const name = card.dataset.name;
+
+      // 🔵 TRYB NORMALNY → info
+      if(!battleMode){
+        card.classList.toggle("active");
+        return;
+      }
+
+      // ⚔️ TRYB WALKI → wybór
+      const dragon = smoki.find(s => s.nazwa === name);
+
+      if(selected.find(s => s.nazwa === name)){
+        selected = selected.filter(s => s.nazwa !== name);
+        card.classList.remove("selected");
+      } else {
+
+        if(selected.length >= 2) return;
+
+        selected.push(dragon);
+        card.classList.add("selected");
+      }
+    };
+
+  });
+
+}
 </script>
 
 </body>
