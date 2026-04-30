@@ -133,7 +133,7 @@ const smoki = [
     atak: "Wystrzeliwuje lepkie, wytrzymałe nici",
     pokarm: "Ryby",
     moc: 82,
-    zdjecie: "ksismoków/slitherwing.jpg"
+    zdjecie: "ksismoków/Threadtail.jpg"
   },
   {
     nazwa: "Snow wraith",
