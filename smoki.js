@@ -1,6 +1,6 @@
 const smoki = [
   {
-    nazwa: "Nocna furia",
+    nazwa: "Biała furia",
     typ: "Strike Class",
     atak: "Plazmowy strzał",
     pokarm: "Ryby",
@@ -8,7 +8,7 @@ const smoki = [
     zdjecie: "ksismoków/nocna_furia.jpg"
   },
   {
-    nazwa: "Biała Furia",
+    nazwa: "Nocna Furia",
     typ: "Strike Class",
     atak: "Plazmowe strzały",
     pokarm: "Ryby",

@@ -18,8 +18,10 @@
   <input type="text" id="search" placeholder="Szukaj smoka...">
 </div>
 
+<!-- CONTROLS -->
 <div class="controls">
-  <div class="featured-dragon" id="featuredDragon"></div>
+
+  <div id="featuredDragon"></div>
 
   <select id="classFilter">
     <option value="all">Wszystkie klasy</option>
@@ -31,9 +33,16 @@
     <option value="nameAsc">A-Z</option>
   </select>
 
-  <button onclick="toggleTheme()" class="theme-btn">
-    🌙 / ☀️
-  </button>
+  <button class="theme-btn" onclick="toggleTheme()">🌙 / ☀️</button>
+
+</div>
+
+<!-- PORÓWNYWARKA -->
+<div class="compare-box">
+  <select id="dragon1"></select>
+  <select id="dragon2"></select>
+  <button onclick="compareDragons()">⚔️ Porównaj</button>
+  <div id="compareResult"></div>
 </div>
 
 <div class="container" id="container"></div>
@@ -43,91 +52,95 @@
 <script>
 const container = document.getElementById("container");
 
-/* MOTYW */
-if(localStorage.getItem("theme") === "light"){
-  document.body.classList.add("light-theme");
-}
-
-/* KLASY */
+/* CLASSES */
 const classes = [...new Set(smoki.map(s => s.typ))];
-classes.forEach(cls => {
+classes.forEach(c => {
   document.getElementById("classFilter").innerHTML +=
-    `<option value="${cls}">${cls}</option>`;
+    `<option value="${c}">${c}</option>`;
 });
 
 /* SMOK DNIA */
-const dragonOfDay = smoki[new Date().getDate() % smoki.length];
-document.getElementById("featuredDragon").innerHTML =
-  `🔥 Smok Dnia: ${dragonOfDay.nazwa}`;
+function renderDragonOfDay(){
+  const d = smoki[new Date().getDate() % smoki.length];
+
+  document.getElementById("featuredDragon").innerHTML = `
+    <div class="dragon-card active featured">
+
+      <img src="${d.zdjecie}">
+
+      <div class="card-top">
+        <div class="dragon-name">🔥 Smok Dnia: ${d.nazwa}</div>
+        <div class="badge">${d.typ}</div>
+      </div>
+
+      <div class="dragon-info" style="max-height:400px;">
+        <div class="section">⚔️ ${d.atak}</div>
+        <div class="section">🍖 ${d.pokarm}</div>
+        <div class="section">📊 Moc: <strong>${d.moc}/100</strong>
+          <div class="power-bar">
+            <div class="power-fill" style="width:${d.moc}%"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  `;
+}
 
 /* RENDER */
-function renderDragons(){
+function render(){
 
   container.innerHTML = "";
 
-  let filtered = [...smoki];
+  let data = [...smoki];
 
   const filter = document.getElementById("classFilter").value;
   const sort = document.getElementById("sortSelect").value;
   const search = document.getElementById("search").value.toLowerCase();
 
   if(filter !== "all"){
-    filtered = filtered.filter(s => s.typ === filter);
+    data = data.filter(s => s.typ === filter);
   }
 
-  filtered = filtered.filter(s =>
-    s.nazwa.toLowerCase().includes(search)
-  );
+  data = data.filter(s => s.nazwa.toLowerCase().includes(search));
 
-  if(sort === "powerDesc"){
-    filtered.sort((a,b)=>b.moc-a.moc);
-  }
+  if(sort === "powerDesc") data.sort((a,b)=>b.moc-a.moc);
+  if(sort === "powerAsc") data.sort((a,b)=>a.moc-b.moc);
+  if(sort === "nameAsc") data.sort((a,b)=>a.nazwa.localeCompare(b.nazwa));
 
-  if(sort === "powerAsc"){
-    filtered.sort((a,b)=>a.moc-b.moc);
-  }
-
-  if(sort === "nameAsc"){
-    filtered.sort((a,b)=>a.nazwa.localeCompare(b.nazwa));
-  }
-
-  filtered.forEach(smok => {
+  data.forEach(s => {
 
     const div = document.createElement("div");
     div.className = "dragon-card";
-    div.dataset.name = smok.nazwa;
+    div.dataset.name = s.nazwa;
 
     div.innerHTML = `
-      <div class="fav ${localStorage.getItem(smok.nazwa) ? "active" : ""}">❤️</div>
+      <div class="fav ${localStorage.getItem(s.nazwa)?'active':''}">❤️</div>
 
-      <img src="${smok.zdjecie}">
+      <img src="${s.zdjecie}">
 
       <div class="card-top">
-        <div class="dragon-name">${smok.nazwa}</div>
-        <div class="badge">${smok.typ}</div>
+        <div class="dragon-name">${s.nazwa}</div>
+        <div class="badge">${s.typ}</div>
       </div>
 
       <div class="dragon-info">
 
-        <div class="section">⚔️ ${smok.atak}</div>
-        <div class="section">🍖 ${smok.pokarm}</div>
+        <div class="section">⚔️ ${s.atak}</div>
+        <div class="section">🍖 ${s.pokarm}</div>
 
         <div class="section">
-          📊 Moc: <strong>${smok.moc}/100</strong>
+          📊 Moc: <strong>${s.moc}/100</strong>
           <div class="power-bar">
-            <div class="power-fill" style="width:${smok.moc}%"></div>
+            <div class="power-fill" style="width:${s.moc}%"></div>
           </div>
         </div>
 
-        <div class="section">
+        <div class="section stars">
           ⭐ Ocena:
-          <div class="stars">
-            ${[1,2,3,4,5].map(i => `
-              <span class="star ${i <= (localStorage.getItem("rating_"+smok.nazwa)||0) ? "active" : ""}" data-rating="${i}">
-                ★
-              </span>
-            `).join("")}
-          </div>
+          ${[1,2,3,4,5].map(i=>`
+            <span class="star ${i <= (localStorage.getItem("r_"+s.nazwa)||0)?'active':''}" data-r="${i}">★</span>
+          `).join("")}
         </div>
 
       </div>
@@ -137,81 +150,77 @@ function renderDragons(){
   });
 
   addEvents();
+  fillCompare();
 }
 
-/* EVENTY */
+/* EVENTS */
 function addEvents(){
 
-  document.querySelectorAll(".dragon-card").forEach(card => {
-    card.addEventListener("click", () => {
-      card.classList.toggle("active");
-    });
+  document.querySelectorAll(".dragon-card").forEach(c=>{
+    c.addEventListener("click",()=>c.classList.toggle("active"));
   });
 
-  document.querySelectorAll(".fav").forEach(fav => {
-    fav.addEventListener("click", e => {
+  document.querySelectorAll(".fav").forEach(f=>{
+    f.onclick = e=>{
       e.stopPropagation();
-
-      const card = fav.closest(".dragon-card");
-      const name = card.dataset.name;
-
-      fav.classList.toggle("active");
-
-      if(fav.classList.contains("active")){
-        localStorage.setItem(name,"1");
-      }else{
-        localStorage.removeItem(name);
-      }
-    });
+      const n = f.closest(".dragon-card").dataset.name;
+      f.classList.toggle("active");
+      localStorage.getItem(n)
+        ? localStorage.removeItem(n)
+        : localStorage.setItem(n,"1");
+    };
   });
 
-  document.querySelectorAll(".star").forEach(star => {
-    star.addEventListener("click", e => {
+  document.querySelectorAll(".star").forEach(s=>{
+    s.onclick = e=>{
       e.stopPropagation();
-
-      const rating = star.dataset.rating;
-      const card = star.closest(".dragon-card");
-      const name = card.dataset.name;
-
-      localStorage.setItem("rating_"+name,rating);
-
-      renderDragons();
-    });
+      const r = s.dataset.r;
+      const n = s.closest(".dragon-card").dataset.name;
+      localStorage.setItem("r_"+n,r);
+      render();
+    };
   });
 }
 
-/* SEARCH/FILTER/SORT */
-document.getElementById("search").addEventListener("input", renderDragons);
-document.getElementById("sortSelect").addEventListener("change", renderDragons);
-document.getElementById("classFilter").addEventListener("change", renderDragons);
+/* COMPARE */
+function fillCompare(){
+  const a=document.getElementById("dragon1");
+  const b=document.getElementById("dragon2");
+
+  a.innerHTML=b.innerHTML="";
+
+  smoki.forEach(s=>{
+    a.innerHTML+=`<option>${s.nazwa}</option>`;
+    b.innerHTML+=`<option>${s.nazwa}</option>`;
+  });
+}
+
+function compareDragons(){
+
+  const a = smoki.find(s=>s.nazwa==dragon1.value);
+  const b = smoki.find(s=>s.nazwa==dragon2.value);
+
+  const w = a.moc>b.moc?a:b;
+
+  document.getElementById("compareResult").innerHTML=`
+    🥇 Wygrywa: <b>${w.nazwa}</b><br>
+    ${a.nazwa}: ${a.moc} vs ${b.nazwa}: ${b.moc}
+  `;
+}
+
+/* CONTROLS */
+search.oninput=render;
+classFilter.onchange=render;
+sortSelect.onchange=render;
 
 /* THEME */
 function toggleTheme(){
-  document.body.classList.toggle("light-theme");
-
-  localStorage.setItem(
-    "theme",
-    document.body.classList.contains("light-theme")
-      ? "light"
-      : "dark"
-  );
+  document.body.classList.toggle("light");
 }
 
-/* POWRÓT */
-function zamknijKsiege(){
-  document.body.classList.add("zamkniecie");
-
-  setTimeout(()=>{
-    window.location.href = "index.html";
-  },600);
-}
-
-/* OTWIERANIE */
-window.addEventListener("load",()=>{
-  document.body.classList.add("otwieranie");
-});
-
-renderDragons();
+/* START */
+renderDragonOfDay();
+render();
 </script>
 
 </body>
