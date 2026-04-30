@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Księga Smoków</title>
-
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -18,8 +17,8 @@
 <div class="search-box">
   <input type="text" id="search" placeholder="Szukaj smoka...">
 </div>
-<div class="controls">
 
+<div class="controls">
   <div class="featured-dragon" id="featuredDragon"></div>
 
   <select id="classFilter">
@@ -35,124 +34,185 @@
   <button onclick="toggleTheme()" class="theme-btn">
     🌙 / ☀️
   </button>
-
 </div>
+
 <div class="container" id="container"></div>
 
 <script src="smoki.js"></script>
 
 <script>
-// GENEROWANIE
 const container = document.getElementById("container");
 
-smoki
-  .sort((a, b) => b.moc - a.moc)
-  .forEach(smok => {
-  const div = document.createElement("div");
-  div.className = "dragon-card";
-  div.dataset.name = smok.nazwa;
+/* MOTYW */
+if(localStorage.getItem("theme") === "light"){
+  document.body.classList.add("light-theme");
+}
 
-  div.innerHTML = `
-    <div class="fav">❤️</div>
-    <img src="${smok.zdjecie}">
-    <div class="card-top">
-      <div class="dragon-name">${smok.nazwa}</div>
-      <div class="badge">${smok.typ}</div>
-    </div>
-
-    <div class="dragon-info">
-      <div class="section">⚔️ ${smok.atak}</div>
-      <div class="section">🍖 ${smok.pokarm}</div>
-
-    <div class="section">
-      📊 Moc:
-      <div class="power-bar">
-        <div class="power-fill" style="width:${smok.moc}%"></div>
-    </div>
-</div>
-      <div class="section">
-        ⭐ Ocena:
-        <div class="stars">
-          <span class="star">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
-          <span class="star">★</span>
-        </div>
-      </div>
-    </div>
-  `;
-
-  container.appendChild(div);
+/* KLASY */
+const classes = [...new Set(smoki.map(s => s.typ))];
+classes.forEach(cls => {
+  document.getElementById("classFilter").innerHTML +=
+    `<option value="${cls}">${cls}</option>`;
 });
 
-// EVENTY
-setTimeout(() => {
+/* SMOK DNIA */
+const dragonOfDay = smoki[new Date().getDate() % smoki.length];
+document.getElementById("featuredDragon").innerHTML =
+  `🔥 Smok Dnia: ${dragonOfDay.nazwa}`;
+
+/* RENDER */
+function renderDragons(){
+
+  container.innerHTML = "";
+
+  let filtered = [...smoki];
+
+  const filter = document.getElementById("classFilter").value;
+  const sort = document.getElementById("sortSelect").value;
+  const search = document.getElementById("search").value.toLowerCase();
+
+  if(filter !== "all"){
+    filtered = filtered.filter(s => s.typ === filter);
+  }
+
+  filtered = filtered.filter(s =>
+    s.nazwa.toLowerCase().includes(search)
+  );
+
+  if(sort === "powerDesc"){
+    filtered.sort((a,b)=>b.moc-a.moc);
+  }
+
+  if(sort === "powerAsc"){
+    filtered.sort((a,b)=>a.moc-b.moc);
+  }
+
+  if(sort === "nameAsc"){
+    filtered.sort((a,b)=>a.nazwa.localeCompare(b.nazwa));
+  }
+
+  filtered.forEach(smok => {
+
+    const div = document.createElement("div");
+    div.className = "dragon-card";
+    div.dataset.name = smok.nazwa;
+
+    div.innerHTML = `
+      <div class="fav ${localStorage.getItem(smok.nazwa) ? "active" : ""}">❤️</div>
+
+      <img src="${smok.zdjecie}">
+
+      <div class="card-top">
+        <div class="dragon-name">${smok.nazwa}</div>
+        <div class="badge">${smok.typ}</div>
+      </div>
+
+      <div class="dragon-info">
+
+        <div class="section">⚔️ ${smok.atak}</div>
+        <div class="section">🍖 ${smok.pokarm}</div>
+
+        <div class="section">
+          📊 Moc: <strong>${smok.moc}/100</strong>
+          <div class="power-bar">
+            <div class="power-fill" style="width:${smok.moc}%"></div>
+          </div>
+        </div>
+
+        <div class="section">
+          ⭐ Ocena:
+          <div class="stars">
+            ${[1,2,3,4,5].map(i => `
+              <span class="star ${i <= (localStorage.getItem("rating_"+smok.nazwa)||0) ? "active" : ""}" data-rating="${i}">
+                ★
+              </span>
+            `).join("")}
+          </div>
+        </div>
+
+      </div>
+    `;
+
+    container.appendChild(div);
+  });
+
+  addEvents();
+}
+
+/* EVENTY */
+function addEvents(){
+
   document.querySelectorAll(".dragon-card").forEach(card => {
     card.addEventListener("click", () => {
       card.classList.toggle("active");
     });
   });
 
-  document.querySelectorAll(".stars").forEach(box => {
-    const stars = box.querySelectorAll(".star");
-    stars.forEach((star, i) => {
-      star.addEventListener("click", (e) => {
-        e.stopPropagation();
-        stars.forEach((s, j) => {
-          s.classList.toggle("active", j <= i);
-        });
-      });
-    });
-  });
-
-  document.querySelectorAll(".dragon-card").forEach(card => {
-    const fav = card.querySelector(".fav");
-    const name = card.dataset.name;
-
-    if (localStorage.getItem(name)) fav.classList.add("active");
-
-    fav.addEventListener("click", (e) => {
+  document.querySelectorAll(".fav").forEach(fav => {
+    fav.addEventListener("click", e => {
       e.stopPropagation();
+
+      const card = fav.closest(".dragon-card");
+      const name = card.dataset.name;
+
       fav.classList.toggle("active");
 
-      if (fav.classList.contains("active")) {
-        localStorage.setItem(name, "1");
-      } else {
+      if(fav.classList.contains("active")){
+        localStorage.setItem(name,"1");
+      }else{
         localStorage.removeItem(name);
       }
     });
   });
-}, 100);
 
-// SEARCH
-document.getElementById("search").addEventListener("input", function() {
-  const value = this.value.toLowerCase();
-  document.querySelectorAll(".dragon-card").forEach(card => {
-    card.style.display = card.dataset.name.toLowerCase().includes(value)
-      ? "block" : "none";
+  document.querySelectorAll(".star").forEach(star => {
+    star.addEventListener("click", e => {
+      e.stopPropagation();
+
+      const rating = star.dataset.rating;
+      const card = star.closest(".dragon-card");
+      const name = card.dataset.name;
+
+      localStorage.setItem("rating_"+name,rating);
+
+      renderDragons();
+    });
   });
-});
-</script>
-<script>
-function zamknijKsiege() {
+}
+
+/* SEARCH/FILTER/SORT */
+document.getElementById("search").addEventListener("input", renderDragons);
+document.getElementById("sortSelect").addEventListener("change", renderDragons);
+document.getElementById("classFilter").addEventListener("change", renderDragons);
+
+/* THEME */
+function toggleTheme(){
+  document.body.classList.toggle("light-theme");
+
+  localStorage.setItem(
+    "theme",
+    document.body.classList.contains("light-theme")
+      ? "light"
+      : "dark"
+  );
+}
+
+/* POWRÓT */
+function zamknijKsiege(){
   document.body.classList.add("zamkniecie");
 
-  setTimeout(() => {
+  setTimeout(()=>{
     window.location.href = "index.html";
-  }, 600); // musi być tyle co animacja
+  },600);
 }
-</script>
-<script>
-// efekt przy wejściu
-window.addEventListener("load", () => {
+
+/* OTWIERANIE */
+window.addEventListener("load",()=>{
   document.body.classList.add("otwieranie");
 });
+
+renderDragons();
 </script>
-<script>
-function toggleMenu() {
-  document.getElementById("bookPanel").classList.toggle("active");
-}
-</script>
+
 </body>
 </html>
