@@ -134,5 +134,21 @@ const smoki = [
     pokarm: "Ryby",
     moc: 82,
     zdjecie: "ksismoków/slitherwing.jpg"
+  },
+  {
+    nazwa: "Snow wraith",
+    typ: "Tidal Class",
+    atak: "Lodowy oddech",
+    pokarm: "Ryby",
+    moc: 87,
+    zdjecie: "ksismoków/Snowwraith.jpg"
+  },
+  {
+    nazwa: "Sentinel",
+    typ: "Boulder Class",
+    atak: "Potężne uderzenia ciałem i szarże",
+    pokarm: "Skały",
+    moc: 88,
+    zdjecie: "ksismoków/Sentinel.jpg"
   }
 ];
