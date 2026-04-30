@@ -27,7 +27,9 @@
 // GENEROWANIE
 const container = document.getElementById("container");
 
-smoki.forEach(smok => {
+smoki
+  .sort((a, b) => b.moc - a.moc)
+  .forEach(smok => {
   const div = document.createElement("div");
   div.className = "dragon-card";
   div.dataset.name = smok.nazwa;
