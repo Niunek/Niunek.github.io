@@ -42,8 +42,9 @@ header {
 
 .controls select,
 .theme-btn,
-.compare-box button {
-  padding:12px 18px;
+.compare-box button,
+.compare-box select {
+  padding:14px 20px;
   border:none;
   border-radius:12px;
   background:linear-gradient(45deg,#00f7ff,#ff00c8);
@@ -51,6 +52,9 @@ header {
   font-weight:bold;
   cursor:pointer;
   transition:0.3s;
+  min-width:180px;
+  font-size:14px;
+  text-align:center;
 }
 
 .controls select:hover,
@@ -63,10 +67,60 @@ header {
 .compare-box {
   text-align:center;
   margin:20px;
+  position:relative;
 }
 
 #compareResult {
   margin-top:10px;
+}
+
+/* VS */
+#vsBox{
+  font-size:60px;
+  font-weight:bold;
+  text-align:center;
+  margin:10px 0;
+  color:#ff00c8;
+  opacity:0;
+  transform:scale(0.5);
+  text-shadow:0 0 15px #00f7ff, 0 0 30px #ff00c8;
+  transition:0.3s;
+}
+
+#vsBox.active{
+  opacity:1;
+  transform:scale(1.4);
+  animation: vsPulse 0.8s infinite alternate;
+}
+
+@keyframes vsPulse{
+  0%{
+    transform:scale(1.2);
+    text-shadow:0 0 10px #00f7ff;
+  }
+  100%{
+    transform:scale(1.5);
+    text-shadow:0 0 35px #ff00c8;
+  }
+}
+
+/* FLASH EFFECT */
+.compare-box.flash::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:0;
+  height:0;
+  background:radial-gradient(circle,#00f7ff55,#ff00c800);
+  border-radius:50%;
+  animation: flash 0.6s ease-out;
+}
+
+@keyframes flash{
+  0%{width:0;height:0;opacity:1;}
+  100%{width:400px;height:400px;opacity:0;}
 }
 
 /* GRID */

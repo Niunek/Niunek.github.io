@@ -10,7 +10,7 @@
 <body>
 
 <div class="top-bar">
-  <a href="#" class="back-btn" onclick="zamknijKsiege()">⬅ Strona główna</a>
+  <a href="/index.html" class="back-btn" onclick="zamknijKsiege()">⬅ Strona główna</a>
   <header>📖 Księga Smoków</header>
 </div>
 
@@ -18,7 +18,6 @@
   <input type="text" id="search" placeholder="Szukaj smoka...">
 </div>
 
-<!-- CONTROLS -->
 <div class="controls">
 
   <div id="featuredDragon"></div>
@@ -37,11 +36,13 @@
 
 </div>
 
-<!-- PORÓWNYWARKA -->
 <div class="compare-box">
   <select id="dragon1"></select>
   <select id="dragon2"></select>
   <button onclick="compareDragons()">⚔️ Porównaj</button>
+
+  <div id="vsBox">VS</div>
+
   <div id="compareResult"></div>
 </div>
 
@@ -136,13 +137,6 @@ function render(){
           </div>
         </div>
 
-        <div class="section stars">
-          ⭐ Ocena:
-          ${[1,2,3,4,5].map(i=>`
-            <span class="star ${i <= (localStorage.getItem("r_"+s.nazwa)||0)?'active':''}" data-r="${i}">★</span>
-          `).join("")}
-        </div>
-
       </div>
     `;
 
@@ -170,16 +164,6 @@ function addEvents(){
         : localStorage.setItem(n,"1");
     };
   });
-
-  document.querySelectorAll(".star").forEach(s=>{
-    s.onclick = e=>{
-      e.stopPropagation();
-      const r = s.dataset.r;
-      const n = s.closest(".dragon-card").dataset.name;
-      localStorage.setItem("r_"+n,r);
-      render();
-    };
-  });
 }
 
 /* COMPARE */
@@ -195,10 +179,20 @@ function fillCompare(){
   });
 }
 
+/* VS ANIMATION */
 function compareDragons(){
 
   const a = smoki.find(s=>s.nazwa==dragon1.value);
   const b = smoki.find(s=>s.nazwa==dragon2.value);
+
+  const vs = document.getElementById("vsBox");
+  const box = document.querySelector(".compare-box");
+
+  vs.classList.add("active");
+  setTimeout(()=>vs.classList.remove("active"),1200);
+
+  box.classList.add("flash");
+  setTimeout(()=>box.classList.remove("flash"),600);
 
   const w = a.moc>b.moc?a:b;
 
