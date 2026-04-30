@@ -10,7 +10,7 @@
 <body>
 
 <div class="top-bar">
-  <a href="/index.html" class="back-btn" onclick="zamknijKsiege()">⬅ Strona główna</a>
+  <a href="/index.html" class="back-btn">⬅ Strona główna</a>
   <header>📖 Księga Smoków</header>
 </div>
 
@@ -36,22 +36,21 @@
 
 </div>
 
+<div class="container" id="container"></div>
+
+<!-- WALKA -->
 <div class="compare-box">
-  <select id="dragon1"></select>
-  <select id="dragon2"></select>
-  <button onclick="compareDragons()">⚔️ Porównaj</button>
+  <button onclick="startBattle()">⚔️ Walka</button>
 
   <div id="vsBox">VS</div>
 
   <div id="compareResult"></div>
 </div>
 
-<div class="container" id="container"></div>
-
 <script src="smoki.js"></script>
 
 <script>
-const container = document.getElementById("container");
+let selected = [];
 
 /* CLASSES */
 const classes = [...new Set(smoki.map(s => s.typ))];
@@ -66,7 +65,6 @@ function renderDragonOfDay(){
 
   document.getElementById("featuredDragon").innerHTML = `
     <div class="dragon-card active featured">
-
       <img src="${d.zdjecie}">
 
       <div class="card-top">
@@ -77,13 +75,8 @@ function renderDragonOfDay(){
       <div class="dragon-info" style="max-height:400px;">
         <div class="section">⚔️ ${d.atak}</div>
         <div class="section">🍖 ${d.pokarm}</div>
-        <div class="section">📊 Moc: <strong>${d.moc}/100</strong>
-          <div class="power-bar">
-            <div class="power-fill" style="width:${d.moc}%"></div>
-          </div>
-        </div>
+        <div class="section">📊 Moc: <strong>${d.moc}/100</strong></div>
       </div>
-
     </div>
   `;
 }
@@ -95,8 +88,8 @@ function render(){
 
   let data = [...smoki];
 
-  const filter = document.getElementById("classFilter").value;
-  const sort = document.getElementById("sortSelect").value;
+  const filter = classFilter.value;
+  const sort = sortSelect.value;
   const search = document.getElementById("search").value.toLowerCase();
 
   if(filter !== "all"){
@@ -116,8 +109,6 @@ function render(){
     div.dataset.name = s.nazwa;
 
     div.innerHTML = `
-      <div class="fav ${localStorage.getItem(s.nazwa)?'active':''}">❤️</div>
-
       <img src="${s.zdjecie}">
 
       <div class="card-top">
@@ -126,17 +117,9 @@ function render(){
       </div>
 
       <div class="dragon-info">
-
         <div class="section">⚔️ ${s.atak}</div>
         <div class="section">🍖 ${s.pokarm}</div>
-
-        <div class="section">
-          📊 Moc: <strong>${s.moc}/100</strong>
-          <div class="power-bar">
-            <div class="power-fill" style="width:${s.moc}%"></div>
-          </div>
-        </div>
-
+        <div class="section">📊 Moc: <strong>${s.moc}/100</strong></div>
       </div>
     `;
 
@@ -144,112 +127,39 @@ function render(){
   });
 
   addEvents();
-  fillCompare();
 }
 
-/* EVENTS */
-function addEvents(){
-
-  document.querySelectorAll(".dragon-card").forEach(c=>{
-    c.addEventListener("click",()=>c.classList.toggle("active"));
-  });
-
-  document.querySelectorAll(".fav").forEach(f=>{
-    f.onclick = e=>{
-      e.stopPropagation();
-      const n = f.closest(".dragon-card").dataset.name;
-      f.classList.toggle("active");
-      localStorage.getItem(n)
-        ? localStorage.removeItem(n)
-        : localStorage.setItem(n,"1");
-    };
-  });
-}
-
-/* COMPARE */
-function fillCompare(){
-  const a=document.getElementById("dragon1");
-  const b=document.getElementById("dragon2");
-
-  a.innerHTML=b.innerHTML="";
-
-  smoki.forEach(s=>{
-    a.innerHTML+=`<option>${s.nazwa}</option>`;
-    b.innerHTML+=`<option>${s.nazwa}</option>`;
-  });
-}
-
-/* VS ANIMATION */
-function compareDragons(){
-
-  const a = smoki.find(s=>s.nazwa==dragon1.value);
-  const b = smoki.find(s=>s.nazwa==dragon2.value);
-
-  const vs = document.getElementById("vsBox");
-  const box = document.querySelector(".compare-box");
-
-  vs.classList.add("active");
-  setTimeout(()=>vs.classList.remove("active"),1200);
-
-  box.classList.add("flash");
-  setTimeout(()=>box.classList.remove("flash"),600);
-
-  const w = a.moc>b.moc?a:b;
-
-  document.getElementById("compareResult").innerHTML=`
-    🥇 Wygrywa: <b>${w.nazwa}</b><br>
-    ${a.nazwa}: ${a.moc} vs ${b.nazwa}: ${b.moc}
-  `;
-}
-
-/* CONTROLS */
-search.oninput=render;
-classFilter.onchange=render;
-sortSelect.onchange=render;
-
-/* THEME */
-function toggleTheme(){
-  document.body.classList.toggle("light");
-}
-
-/* START */
-renderDragonOfDay();
-render();
-let selected = [];
-
+/* CLICK SYSTEM */
 function addEvents(){
 
   document.querySelectorAll(".dragon-card").forEach(card => {
 
-    card.addEventListener("click", (e) => {
+    card.onclick = () => {
 
       const name = card.dataset.name;
       const dragon = smoki.find(s => s.nazwa === name);
 
-      // toggle selection
       if(selected.find(s => s.nazwa === name)){
         selected = selected.filter(s => s.nazwa !== name);
         card.classList.remove("selected");
       } else {
 
-        if(selected.length >= 2) return; // max 2
+        if(selected.length >= 2) return;
 
         selected.push(dragon);
         card.classList.add("selected");
       }
-
-      // gdy 2 wybrane → walka
-      if(selected.length === 2){
-        startBattle();
-      }
-    });
-
+    };
   });
-
 }
 
-/* WALKA + VS */
+/* WALKA */
 function startBattle(){
+
+  if(selected.length < 2){
+    compareResult.innerHTML = "⚠️ Wybierz 2 smoki!";
+    return;
+  }
 
   const a = selected[0];
   const b = selected[1];
@@ -267,13 +177,12 @@ function startBattle(){
 
   const winner = a.moc > b.moc ? a : b;
 
-  document.getElementById("compareResult").innerHTML = `
+  compareResult.innerHTML = `
     ⚔️ WALKA<br><br>
     🐉 ${a.nazwa} (${a.moc}) vs ${b.nazwa} (${b.moc})<br><br>
     🥇 Wygrywa: <b>${winner.nazwa}</b>
   `;
 
-  // reset po walce
   setTimeout(()=>{
     selected = [];
     document.querySelectorAll(".dragon-card").forEach(c=>{
@@ -281,6 +190,20 @@ function startBattle(){
     });
   }, 1500);
 }
+
+/* CONTROLS */
+search.oninput = render;
+classFilter.onchange = render;
+sortSelect.onchange = render;
+
+/* THEME */
+function toggleTheme(){
+  document.body.classList.toggle("light");
+}
+
+/* START */
+renderDragonOfDay();
+render();
 </script>
 
 </body>

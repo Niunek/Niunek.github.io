@@ -40,10 +40,9 @@ header {
   margin:10px;
 }
 
+/* BUTTONS */
 .controls select,
-.theme-btn,
-.compare-box button,
-.compare-box select {
+.theme-btn {
   padding:14px 20px;
   border:none;
   border-radius:12px;
@@ -53,74 +52,11 @@ header {
   cursor:pointer;
   transition:0.3s;
   min-width:180px;
-  font-size:14px;
-  text-align:center;
 }
 
 .controls select:hover,
-.theme-btn:hover,
-.compare-box button:hover {
+.theme-btn:hover {
   transform:scale(1.08);
-}
-
-/* COMPARE */
-.compare-box {
-  text-align:center;
-  margin:20px;
-  position:relative;
-}
-
-#compareResult {
-  margin-top:10px;
-}
-
-/* VS */
-#vsBox{
-  font-size:60px;
-  font-weight:bold;
-  text-align:center;
-  margin:10px 0;
-  color:#ff00c8;
-  opacity:0;
-  transform:scale(0.5);
-  text-shadow:0 0 15px #00f7ff, 0 0 30px #ff00c8;
-  transition:0.3s;
-}
-
-#vsBox.active{
-  opacity:1;
-  transform:scale(1.4);
-  animation: vsPulse 0.8s infinite alternate;
-}
-
-@keyframes vsPulse{
-  0%{
-    transform:scale(1.2);
-    text-shadow:0 0 10px #00f7ff;
-  }
-  100%{
-    transform:scale(1.5);
-    text-shadow:0 0 35px #ff00c8;
-  }
-}
-
-/* FLASH EFFECT */
-.compare-box.flash::before{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:0;
-  height:0;
-  background:radial-gradient(circle,#00f7ff55,#ff00c800);
-  border-radius:50%;
-  animation: flash 0.6s ease-out;
-}
-
-@keyframes flash{
-  0%{width:0;height:0;opacity:1;}
-  100%{width:400px;height:400px;opacity:0;}
 }
 
 /* GRID */
@@ -155,7 +91,7 @@ header {
   background:#0b1220;
 }
 
-/* INFO */
+/* TOP */
 .card-top {
   display:flex;
   justify-content:space-between;
@@ -168,6 +104,7 @@ header {
   border-radius:8px;
 }
 
+/* INFO */
 .dragon-info {
   max-height:0;
   overflow:hidden;
@@ -198,29 +135,82 @@ header {
   background:linear-gradient(90deg,#00f7ff,#ff00c8);
 }
 
-/* STARS */
-.star {
-  cursor:pointer;
-  color:gray;
+/* SELECTION (WALKA) */
+.dragon-card.selected{
+  border:2px solid #00f7ff;
+  box-shadow:0 0 25px #00f7ff;
+  transform:scale(1.04);
 }
 
-.star.active {
-  color:gold;
+.dragon-card.selected:nth-of-type(2){
+  border:2px solid #ff00c8;
+  box-shadow:0 0 25px #ff00c8;
 }
 
-/* FAV */
-.fav {
+/* VS */
+#vsBox{
+  font-size:60px;
+  font-weight:bold;
+  text-align:center;
+  margin:15px 0;
+  color:#ff00c8;
+  opacity:0;
+  transform:scale(0.5);
+  text-shadow:0 0 20px #00f7ff, 0 0 30px #ff00c8;
+  transition:0.3s;
+}
+
+#vsBox.active{
+  opacity:1;
+  transform:scale(1.5);
+  animation: vsPulse 0.8s infinite alternate;
+}
+
+@keyframes vsPulse{
+  0%{
+    transform:scale(1.2);
+    text-shadow:0 0 10px #00f7ff;
+  }
+  100%{
+    transform:scale(1.6);
+    text-shadow:0 0 35px #ff00c8;
+  }
+}
+
+/* FLASH EFFECT */
+.compare-box.flash::before{
+  content:"";
   position:absolute;
-  right:10px;
-  top:10px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:0;
+  height:0;
+  background:radial-gradient(circle,#00f7ff55,#ff00c000);
+  border-radius:50%;
+  animation: flash 0.6s ease-out;
 }
 
-.fav.active {
-  color:red;
+@keyframes flash{
+  0%{width:0;height:0;opacity:1;}
+  100%{width:400px;height:400px;opacity:0;}
 }
 
-/* FEATURED */
-.featured {
+/* COMPARE BOX */
+.compare-box{
+  text-align:center;
+  margin:20px;
+  position:relative;
+}
+
+/* RESULT */
+#compareResult{
+  margin-top:10px;
+  font-size:18px;
+}
+
+/* FEATURED DRAGON */
+.featured{
   max-width:300px;
   margin:auto;
 }
@@ -238,14 +228,4 @@ body.light .dragon-card {
 
 body.light .section {
   background:#e2e8f0;
-}
-.dragon-card.selected{
-  border:2px solid #00f7ff;
-  box-shadow:0 0 20px #00f7ff;
-  transform:scale(1.03);
-}
-
-.dragon-card.selected:nth-of-type(2){
-  border:2px solid #ff00c8;
-  box-shadow:0 0 20px #ff00c8;
 }
