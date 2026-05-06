@@ -10,7 +10,7 @@
 <body>
 
 <div class="top-bar">
-  <a href="/index.html" class="back-btn">⬅ Strona główna</a>
+  <a href="#" class="back-btn" onclick="zamknijKsiege()">⬅ Strona główna</a>
   <header>📖 Księga Smoków</header>
 </div>
 
@@ -18,6 +18,7 @@
   <input type="text" id="search" placeholder="Szukaj smoka...">
 </div>
 
+<!-- CONTROLS -->
 <div class="controls">
 
   <div id="featuredDragon"></div>
@@ -36,21 +37,20 @@
 
 </div>
 
-<div class="container" id="container"></div>
-
-<!-- WALKA -->
+<!-- PORÓWNYWARKA -->
 <div class="compare-box">
-  <button onclick="toggleBattleMode()">⚔️ Walka</button>
-
-  <div id="vsBox">VS</div>
-
+  <select id="dragon1"></select>
+  <select id="dragon2"></select>
+  <button onclick="compareDragons()">⚔️ Porównaj</button>
   <div id="compareResult"></div>
 </div>
+
+<div class="container" id="container"></div>
 
 <script src="smoki.js"></script>
 
 <script>
-let selected = [];
+const container = document.getElementById("container");
 
 /* CLASSES */
 const classes = [...new Set(smoki.map(s => s.typ))];
@@ -65,6 +65,7 @@ function renderDragonOfDay(){
 
   document.getElementById("featuredDragon").innerHTML = `
     <div class="dragon-card active featured">
+
       <img src="${d.zdjecie}">
 
       <div class="card-top">
@@ -75,8 +76,13 @@ function renderDragonOfDay(){
       <div class="dragon-info" style="max-height:400px;">
         <div class="section">⚔️ ${d.atak}</div>
         <div class="section">🍖 ${d.pokarm}</div>
-        <div class="section">📊 Moc: <strong>${d.moc}/100</strong></div>
+        <div class="section">📊 Moc: <strong>${d.moc}/100</strong>
+          <div class="power-bar">
+            <div class="power-fill" style="width:${d.moc}%"></div>
+          </div>
+        </div>
       </div>
+
     </div>
   `;
 }
@@ -88,8 +94,8 @@ function render(){
 
   let data = [...smoki];
 
-  const filter = classFilter.value;
-  const sort = sortSelect.value;
+  const filter = document.getElementById("classFilter").value;
+  const sort = document.getElementById("sortSelect").value;
   const search = document.getElementById("search").value.toLowerCase();
 
   if(filter !== "all"){
@@ -109,6 +115,8 @@ function render(){
     div.dataset.name = s.nazwa;
 
     div.innerHTML = `
+      <div class="fav ${localStorage.getItem(s.nazwa)?'active':''}">❤️</div>
+
       <img src="${s.zdjecie}">
 
       <div class="card-top">
@@ -117,9 +125,24 @@ function render(){
       </div>
 
       <div class="dragon-info">
+
         <div class="section">⚔️ ${s.atak}</div>
         <div class="section">🍖 ${s.pokarm}</div>
-        <div class="section">📊 Moc: <strong>${s.moc}/100</strong></div>
+
+        <div class="section">
+          📊 Moc: <strong>${s.moc}/100</strong>
+          <div class="power-bar">
+            <div class="power-fill" style="width:${s.moc}%"></div>
+          </div>
+        </div>
+
+        <div class="section stars">
+          ⭐ Ocena:
+          ${[1,2,3,4,5].map(i=>`
+            <span class="star ${i <= (localStorage.getItem("r_"+s.nazwa)||0)?'active':''}" data-r="${i}">★</span>
+          `).join("")}
+        </div>
+
       </div>
     `;
 
@@ -127,74 +150,68 @@ function render(){
   });
 
   addEvents();
+  fillCompare();
 }
 
-/* CLICK SYSTEM */
+/* EVENTS */
 function addEvents(){
 
-  document.querySelectorAll(".dragon-card").forEach(card => {
+  document.querySelectorAll(".dragon-card").forEach(c=>{
+    c.addEventListener("click",()=>c.classList.toggle("active"));
+  });
 
-    card.onclick = () => {
+  document.querySelectorAll(".fav").forEach(f=>{
+    f.onclick = e=>{
+      e.stopPropagation();
+      const n = f.closest(".dragon-card").dataset.name;
+      f.classList.toggle("active");
+      localStorage.getItem(n)
+        ? localStorage.removeItem(n)
+        : localStorage.setItem(n,"1");
+    };
+  });
 
-      const name = card.dataset.name;
-      const dragon = smoki.find(s => s.nazwa === name);
-
-      if(selected.find(s => s.nazwa === name)){
-        selected = selected.filter(s => s.nazwa !== name);
-        card.classList.remove("selected");
-      } else {
-
-        if(selected.length >= 2) return;
-
-        selected.push(dragon);
-        card.classList.add("selected");
-      }
+  document.querySelectorAll(".star").forEach(s=>{
+    s.onclick = e=>{
+      e.stopPropagation();
+      const r = s.dataset.r;
+      const n = s.closest(".dragon-card").dataset.name;
+      localStorage.setItem("r_"+n,r);
+      render();
     };
   });
 }
 
-/* WALKA */
-function startBattle(){
+/* COMPARE */
+function fillCompare(){
+  const a=document.getElementById("dragon1");
+  const b=document.getElementById("dragon2");
 
-  if(selected.length < 2){
-    compareResult.innerHTML = "⚠️ Wybierz 2 smoki!";
-    return;
-  }
+  a.innerHTML=b.innerHTML="";
 
-  const a = selected[0];
-  const b = selected[1];
+  smoki.forEach(s=>{
+    a.innerHTML+=`<option>${s.nazwa}</option>`;
+    b.innerHTML+=`<option>${s.nazwa}</option>`;
+  });
+}
 
-  const vs = document.getElementById("vsBox");
-  const box = document.querySelector(".compare-box");
+function compareDragons(){
 
-  vs.classList.add("active");
-  box.classList.add("flash");
+  const a = smoki.find(s=>s.nazwa==dragon1.value);
+  const b = smoki.find(s=>s.nazwa==dragon2.value);
 
-  setTimeout(()=>{
-    vs.classList.remove("active");
-    box.classList.remove("flash");
-  }, 1000);
+  const w = a.moc>b.moc?a:b;
 
-  const winner = a.moc > b.moc ? a : b;
-
-  compareResult.innerHTML = `
-    ⚔️ WALKA<br><br>
-    🐉 ${a.nazwa} (${a.moc}) vs ${b.nazwa} (${b.moc})<br><br>
-    🥇 Wygrywa: <b>${winner.nazwa}</b>
+  document.getElementById("compareResult").innerHTML=`
+    🥇 Wygrywa: <b>${w.nazwa}</b><br>
+    ${a.nazwa}: ${a.moc} vs ${b.nazwa}: ${b.moc}
   `;
-
-  setTimeout(()=>{
-    selected = [];
-    document.querySelectorAll(".dragon-card").forEach(c=>{
-      c.classList.remove("selected");
-    });
-  }, 1500);
 }
 
 /* CONTROLS */
-search.oninput = render;
-classFilter.onchange = render;
-sortSelect.onchange = render;
+search.oninput=render;
+classFilter.onchange=render;
+sortSelect.onchange=render;
 
 /* THEME */
 function toggleTheme(){
@@ -204,54 +221,6 @@ function toggleTheme(){
 /* START */
 renderDragonOfDay();
 render();
-let selected = [];
-let battleMode = false;
-
-/* TRYB WALKI */
-function toggleBattleMode(){
-  battleMode = !battleMode;
-  selected = [];
-
-  document.querySelectorAll(".dragon-card").forEach(c=>{
-    c.classList.remove("selected");
-  });
-
-  alert(battleMode ? "⚔️ TRYB WALKI WŁĄCZONY" : "ℹ️ TRYB NORMALNY");
-}
-
-/* EVENTY */
-function addEvents(){
-
-  document.querySelectorAll(".dragon-card").forEach(card => {
-
-    card.onclick = () => {
-
-      const name = card.dataset.name;
-
-      // 🔵 TRYB NORMALNY → info
-      if(!battleMode){
-        card.classList.toggle("active");
-        return;
-      }
-
-      // ⚔️ TRYB WALKI → wybór
-      const dragon = smoki.find(s => s.nazwa === name);
-
-      if(selected.find(s => s.nazwa === name)){
-        selected = selected.filter(s => s.nazwa !== name);
-        card.classList.remove("selected");
-      } else {
-
-        if(selected.length >= 2) return;
-
-        selected.push(dragon);
-        card.classList.add("selected");
-      }
-    };
-
-  });
-
-}
 </script>
 
 </body>
