@@ -150,5 +150,13 @@ const smoki = [
     pokarm: "Skały",
     moc: 88,
     zdjecie: "ksismoków/Sentinel.jpg"
+  },
+  {
+    nazwa: "Sentinel",
+    typ: "Boulder Class",
+    atak: "Potężne uderzenia ciałem i szarże",
+    pokarm: "Skały",
+    moc: 88,
+    zdjecie: "ksismoków/Sentinel.jpg"
   }
 ];
