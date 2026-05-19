@@ -413,23 +413,36 @@ background:rgba(0,0,0,0.4);
 backdrop-filter:blur(10px);
 z-index:-1;
 }
+#achievementPopup{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#111;
+color:white;
+padding:15px 20px;
+border-radius:10px;
+display:none;
+z-index:99999;
+border:2px solid gold;
+font-family:Arial;
+}
 
 </style>
 <!-- ===== ACHIEVEMENTS SYSTEM ===== -->
 
 <div id="achievementPopup">
-  🏆 Osiągnięcie odblokowane!
+   Osiągnięcie odblokowane!
   <div id="achievementText"></div>
 </div>
 
 <div id="achievementPanel">
-  <h2>🏆 Osiągnięcia</h2>
+  <h2> Osiągnięcia</h2>
 
-  <div id="ach-dragon">❌ 🐉 Dragon Hunter (5 smoków)</div>
-  <div id="ach-title">❌ 👀 Ciekawski (klik tytuł)</div>
-  <div id="ach-social">❌ 📱 Social Guy</div>
-  <div id="ach-dragonword">❌ 🔥 Wybraniec (dragon)</div>
-  <div id="ach-explorer">❌ 🕵️ Explorer (ukryty przycisk)</div>
+  <div id="ach-dragon">❌  Dragon Hunter (5 smoków)</div>
+  <div id="ach-title">❌  Ciekawski (klik tytuł)</div>
+  <div id="ach-social">❌  Social Guy</div>
+  <div id="ach-dragonword">❌  Wybraniec (dragon)</div>
+  <div id="ach-explorer">❌  Explorer (ukryty przycisk)</div>
 
   <button onclick="closeAchievements()">Zamknij</button>
 </div>
@@ -493,6 +506,33 @@ opacity:0.05;
 background:white;
 cursor:pointer;
 }
+#achButton{
+position:fixed;
+bottom:20px;
+left:20px;
+padding:10px 15px;
+background:#222;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+z-index:99999;
+}
+#achievementPanel{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#111;
+color:white;
+padding:20px;
+border-radius:15px;
+display:none;
+z-index:99999;
+width:300px;
+font-family:Arial;
+}
+
 </style>
 <link rel="stylesheet" href="style.css">
 </head>
@@ -569,7 +609,7 @@ function toggleDescription() {
 <div class="mem-section" id="meme"></div>
 
   <h2>Zobacz też memy</h2>
-  <p>Na mojej stronie są też śmieszne memy 😎</p>
+  <p>Na mojej stronie są też śmieszne memy </p>
 
   <a href="stronka2">
     <button class="mem-button">Przejdź do memów</button>
@@ -666,20 +706,25 @@ function closeAchievements(){
 
 /* ===== TITLE CLICK ===== */
 document.addEventListener("DOMContentLoaded", () => {
-  const title = document.querySelector(".gaming-title");
+const title = document.querySelector(".gaming-title");
 
+if(title){
+  title.addEventListener("click", () => {
+    unlock("title", "👀 Kliknąłeś tytuł!");
+  }, { once: true });
+}
   if(title){
     title.addEventListener("click", () => {
-      unlock("title", "👀 Kliknąłeś tytuł!");
+      unlock("title", " Kliknąłeś tytuł!");
     });
   }
 
   /* ===== SOCIAL CLICK ===== */
-  document.querySelectorAll(".social-card").forEach(el => {
-    el.addEventListener("click", () => {
-      unlock("social", "📱 Social media odkryte!");
-    });
-  });
+document.querySelectorAll(".social-card").forEach(el => {
+  el.addEventListener("click", () => {
+    unlock("social", "📱 Social media odkryte!");
+  }, { once: true });
+});
 
   /* ===== SECRET WORD ===== */
   let code = "";
@@ -688,7 +733,7 @@ document.addEventListener("DOMContentLoaded", () => {
     code += e.key.toLowerCase();
 
     if(code.includes("dragon")){
-      unlock("word", "🔥 Wpisano DRAGON!");
+      unlock("word", " Wpisano DRAGON!");
       code = "";
     }
 
@@ -696,9 +741,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ===== SECRET EXPLORER ===== */
-  document.getElementById("secretExplorer").addEventListener("click", () => {
+const explorer = document.getElementById("secretExplorer");
+
+if(explorer){
+  explorer.addEventListener("click", () => {
     unlock("explorer", "🕵️ Znaleziono ukryty punkt!");
   });
+}
 
   updateUI();
 });
@@ -706,7 +755,7 @@ function dragonOpen(){
   dragonsOpened++;
 
   if(dragonsOpened >= 5){
-    unlock("dragon", "🐉 Otworzyłeś 5 smoków!");
+    unlock("dragon", " Otworzyłeś 5 smoków!");
   }
 }
 </script>
