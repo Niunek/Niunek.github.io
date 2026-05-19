@@ -440,8 +440,25 @@ z-index:9999;
 flex-direction:column;
 animation: glitch 0.2s infinite;
 ">
-🐉 LEGENDARNY SMOK ODNALEZIONY 🐉
+
+<button onclick="closeDragon()" style="
+position:absolute;
+top:20px;
+right:20px;
+padding:10px 20px;
+font-size:20px;
+background:red;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+">
+X
+</button>
+
+ LEGENDARNY SMOK ODNALEZIONY 
 <p style="font-size:20px;">Witaj wybrańcu...</p>
+
 </div>
 
 <audio id="dragonSound">
@@ -459,6 +476,10 @@ animation: glitch 0.2s infinite;
 </style>
 
 <script>
+  function closeDragon(){
+    document.getElementById("secretDragon").style.display = "none";
+    document.body.style.background = "";
+}
 let secretCode = "";
 
 document.addEventListener("keydown", (e) => {
