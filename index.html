@@ -413,8 +413,87 @@ background:rgba(0,0,0,0.4);
 backdrop-filter:blur(10px);
 z-index:-1;
 }
-</style>
 
+</style>
+<!-- ===== ACHIEVEMENTS SYSTEM ===== -->
+
+<div id="achievementPopup">
+  🏆 Osiągnięcie odblokowane!
+  <div id="achievementText"></div>
+</div>
+
+<div id="achievementPanel">
+  <h2>🏆 Osiągnięcia</h2>
+
+  <div id="ach-dragon">❌ 🐉 Dragon Hunter (5 smoków)</div>
+  <div id="ach-title">❌ 👀 Ciekawski (klik tytuł)</div>
+  <div id="ach-social">❌ 📱 Social Guy</div>
+  <div id="ach-dragonword">❌ 🔥 Wybraniec (dragon)</div>
+  <div id="ach-explorer">❌ 🕵️ Explorer (ukryty przycisk)</div>
+
+  <button onclick="closeAchievements()">Zamknij</button>
+</div>
+
+<button id="achButton" onclick="toggleAchievements()">🏆 Osiągnięcia</button>
+
+<div id="secretExplorer"></div>
+
+<style>
+#achievementPopup{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#111;
+color:white;
+padding:15px;
+border-radius:10px;
+display:none;
+z-index:99999;
+border:2px solid gold;
+}
+
+#achievementPanel{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#111;
+color:white;
+padding:20px;
+border-radius:15px;
+display:none;
+z-index:99999;
+width:300px;
+}
+
+#achievementPanel div{
+margin:10px 0;
+}
+
+#achButton{
+position:fixed;
+bottom:20px;
+left:20px;
+padding:10px 15px;
+background:#222;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+z-index:99999;
+}
+
+#secretExplorer{
+position:fixed;
+bottom:2px;
+right:2px;
+width:10px;
+height:10px;
+opacity:0.05;
+background:white;
+cursor:pointer;
+}
+</style>
 <link rel="stylesheet" href="style.css">
 </head>
 <script>
@@ -422,88 +501,6 @@ function toggleDescription() {
   const desc = document.getElementById('server-desc');
   desc.classList.toggle('show');
 }
-</script>
-<div id="secretDragon" style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-color:red;
-font-size:50px;
-font-family:Arial;
-justify-content:center;
-align-items:center;
-z-index:9999;
-flex-direction:column;
-animation: glitch 0.2s infinite;
-">
-
-<button onclick="closeDragon()" style="
-position:absolute;
-top:20px;
-right:20px;
-padding:10px 20px;
-font-size:20px;
-background:red;
-color:white;
-border:none;
-border-radius:10px;
-cursor:pointer;
-">
-X
-</button>
-
- LEGENDARNY SMOK ODNALEZIONY 
-<p style="font-size:20px;">Witaj wybrańcu...</p>
-
-</div>
-
-<audio id="dragonSound">
-  <source src="https://www.myinstants.com/media/sounds/vine-boom.mp3" type="audio/mpeg">
-</audio>
-
-<style>
-@keyframes glitch {
-  0% { transform: translate(2px, 2px); }
-  25% { transform: translate(-2px, 2px); }
-  50% { transform: translate(2px, -2px); }
-  75% { transform: translate(-2px, -2px); }
-  100% { transform: translate(2px, 2px); }
-}
-</style>
-
-<script>
-  function closeDragon(){
-    document.getElementById("secretDragon").style.display = "none";
-    document.body.style.background = "";
-}
-let secretCode = "";
-
-document.addEventListener("keydown", (e) => {
-    secretCode += e.key.toLowerCase();
-
-    if(secretCode.includes("dragon")) {
-
-        document.getElementById("secretDragon").style.display = "flex";
-
-        document.body.style.background = "darkred";
-
-        document.getElementById("dragonSound").play();
-
-        setTimeout(() => {
-            alert("🐉 Odblokowano sekretny tryb smoka!");
-        }, 500);
-
-        secretCode = "";
-    }
-
-    if(secretCode.length > 20){
-        secretCode = "";
-    }
-});
 </script>
 <body>
 
@@ -534,29 +531,29 @@ document.addEventListener("keydown", (e) => {
 <img src="smoki/smoczek.jpg" alt="Śmieszny smoczek">
 </a>
 
-<img src="smoki/NFdance.jpg" width="300" height="200" class="zoom">
-<img src="smoki/BFdance.jpg" width="300" height="200" class="zoom">
-<img src="smoki/NFsing.jpg" width="300" height="200" class="zoom">
-<img src="smoki/BFsing.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok1.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok2.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok3.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok4.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok5.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok6.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok7.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok8.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok9.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok10.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok11.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok12.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok13.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok14.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok15.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok16.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok17.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok18.jpg" width="300" height="200" class="zoom">
-<img src="smoki/Smok19.jpg" width="300" height="200" class="zoom">
+<img src="smoki/NFdance.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/BFdance.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/NFsing.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/BFsing.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok1.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok2.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok3.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok4.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok5.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok6.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok7.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok8.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok9.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok10.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok11.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok12.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok13.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok14.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok15.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok16.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok17.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok18.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
+<img src="smoki/Smok19.jpg" width="300" height="200" class="zoom"onclick="dragonOpen()">
 
 <!-- Minecraft Server Section -->
 <div class="server-card" id="server" onclick="toggleDescription()">
@@ -624,6 +621,93 @@ color:{value:"#ffffff"}
 <script>
 function toggleMenu(){
   document.getElementById("menuPanel").classList.toggle("active");
+}
+</script>
+<script>
+let unlocked = JSON.parse(localStorage.getItem("achievements") || "[]");
+let dragonsOpened = 0;
+
+/* ===== UPDATE UI ===== */
+function updateUI(){
+  if(unlocked.includes("dragon")) document.getElementById("ach-dragon").innerText = "✅ 🐉 Dragon Hunter";
+  if(unlocked.includes("title")) document.getElementById("ach-title").innerText = "✅ 👀 Ciekawski";
+  if(unlocked.includes("social")) document.getElementById("ach-social").innerText = "✅ 📱 Social Guy";
+  if(unlocked.includes("word")) document.getElementById("ach-dragonword").innerText = "✅ 🔥 Wybraniec";
+  if(unlocked.includes("explorer")) document.getElementById("ach-explorer").innerText = "✅ 🕵️ Explorer";
+}
+
+/* ===== POPUP ===== */
+function showPopup(text){
+  const popup = document.getElementById("achievementPopup");
+  document.getElementById("achievementText").innerText = text;
+  popup.style.display = "block";
+
+  setTimeout(() => popup.style.display = "none", 2500);
+}
+
+/* ===== UNLOCK ===== */
+function unlock(id, text){
+  if(unlocked.includes(id)) return;
+
+  unlocked.push(id);
+  localStorage.setItem("achievements", JSON.stringify(unlocked));
+
+  showPopup(text);
+  updateUI();
+}
+
+/* ===== MENU ===== */
+function toggleAchievements(){
+  document.getElementById("achievementPanel").style.display = "block";
+}
+function closeAchievements(){
+  document.getElementById("achievementPanel").style.display = "none";
+}
+
+/* ===== TITLE CLICK ===== */
+document.addEventListener("DOMContentLoaded", () => {
+  const title = document.querySelector(".gaming-title");
+
+  if(title){
+    title.addEventListener("click", () => {
+      unlock("title", "👀 Kliknąłeś tytuł!");
+    });
+  }
+
+  /* ===== SOCIAL CLICK ===== */
+  document.querySelectorAll(".social-card").forEach(el => {
+    el.addEventListener("click", () => {
+      unlock("social", "📱 Social media odkryte!");
+    });
+  });
+
+  /* ===== SECRET WORD ===== */
+  let code = "";
+
+  document.addEventListener("keydown", (e) => {
+    code += e.key.toLowerCase();
+
+    if(code.includes("dragon")){
+      unlock("word", "🔥 Wpisano DRAGON!");
+      code = "";
+    }
+
+    if(code.length > 20) code = "";
+  });
+
+  /* ===== SECRET EXPLORER ===== */
+  document.getElementById("secretExplorer").addEventListener("click", () => {
+    unlock("explorer", "🕵️ Znaleziono ukryty punkt!");
+  });
+
+  updateUI();
+});
+function dragonOpen(){
+  dragonsOpened++;
+
+  if(dragonsOpened >= 5){
+    unlock("dragon", "🐉 Otworzyłeś 5 smoków!");
+  }
 }
 </script>
 </body>
